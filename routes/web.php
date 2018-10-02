@@ -13,6 +13,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/product/{product}', 'ProductController@update')->name('product.show');
 
 Route::post('/product/{product}', 'ProductController@update')->name('upload');
+Route::get('/product', 'ProductController@index');
 Route::resource('product', 'ProductController');
 
 
