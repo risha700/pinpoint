@@ -1,0 +1,73 @@
+//uikit3
+
+@import "variables";
+@import "~uikit/src/scss/variables-theme.scss";
+@import "~uikit/src/scss/mixins-theme.scss";
+@import "~uikit/src/scss/uikit-theme.scss";
+
+
+//vuetify
+@import'~vuetify/dist/vuetify.min.css';
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons');
+
+//custom css
+
+
+//.hover-style:hover{
+//  border: solid 1px  $global-primary-background;
+//  cursor: pointer;
+//  color:  $global-primary-background;
+//}
+
+
+.straight-line:before{
+  background-color: #fff;
+  content: "";
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: 58%;
+  opacity: 0.3;
+}
+
+.straight-line , .dashed{
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.dashed.uk-active{
+  background: linear-gradient(to right top, #8575AA, #5B7BB5, #0081B5, #0084A7, #00858D,#8575AA) !important;
+  color: palevioletred;
+}
+
+.dashed > div{
+  background: rgba(3,27,78,.5)!important;
+}
+
+#bottom-curve{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: auto;
+}
+
+#top-curve{
+  position: absolute;
+  bottom: auto;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: auto;
+}
+
+
+a:active,
+a:hover {
+  text-decoration: none !important;
+}
