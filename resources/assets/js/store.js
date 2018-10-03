@@ -185,7 +185,7 @@ export default {
         },
 
         async loadAllProducts(state){
-            await axios.get('/product').then(({data})=>state.commit('loadAllProducts', data))
+            await axios.get('/shop').then(({data})=>state.commit('loadAllProducts', data))
         }
 
 
