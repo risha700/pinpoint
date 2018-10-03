@@ -150,7 +150,7 @@ class ProductController extends Controller
 
             ImageOptimizer::optimize($file, $path);
 
-//        $product = Product::where('id', $request->id)->firstOrFail();
+            $product = Product::where('id', $request->id)->firstOrFail();
 
             $product->photos()->create(['path' => "/product/photos/{$fileName}"]);
             flash()->success('Uploaded successfully', '');
