@@ -10,6 +10,10 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/product', function (){
+    dd('working');
+});
+
 Route::get('/product/{product}', 'ProductController@update')->name('product.show');
 Route::post('/product/{product}', 'ProductController@update')->name('upload');
 Route::resource('/product', 'ProductController');
