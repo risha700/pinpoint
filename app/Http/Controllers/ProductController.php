@@ -22,35 +22,14 @@ class ProductController extends Controller
     {
 
 
-        if (request()->category){
 
-            $products = Product::with('categories')->whereHas('categories', function ($query){
-                $query->where('slug', request()->category);
-
-            })->paginate(4);
-
-
-        }else{
-
-//            $products = Product::inRandomOrder()->take(12)->get();
-//            $products= $product->inStock()->paginate(12);
-
-
-                      $products = Product::paginate(12);
-//                      return $products;
-//                            $products = Product::has('photos')->get();
-//                            $photo = Product::with('photos')->get();
-
-        }
 
         $categories = Category::all();
+        $products = Product::paginate(12);
 
 
         if(request()->wantsJson()){
-
-//            $products = Product::paginate(12);
-////            $products= $product->inStock()->paginate(12);
-//
+            
             $products = Product::with('photos')->get();
             return $products;
         }
@@ -58,6 +37,46 @@ class ProductController extends Controller
 
         return view('product.index', compact('products', 'categories'));
     }
+//    public function index()
+//    {
+//
+//
+//        if (request()->category){
+//
+//            $products = Product::with('categories')->whereHas('categories', function ($query){
+//                $query->where('slug', request()->category);
+//
+//            })->paginate(4);
+//
+//
+//        }else{
+//
+////            $products = Product::inRandomOrder()->take(12)->get();
+////            $products= $product->inStock()->paginate(12);
+//
+//
+//                      $products = Product::paginate(12);
+////                      return $products;
+////                            $products = Product::has('photos')->get();
+////                            $photo = Product::with('photos')->get();
+//
+//        }
+//
+//        $categories = Category::all();
+//
+//
+//        if(request()->wantsJson()){
+//
+////            $products = Product::paginate(12);
+//////            $products= $product->inStock()->paginate(12);
+////
+//            $products = Product::with('photos')->get();
+//            return $products;
+//        }
+//
+//
+//        return view('product.index', compact('products', 'categories'));
+//    }
 
 
     /**
