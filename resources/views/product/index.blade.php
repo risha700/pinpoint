@@ -73,7 +73,7 @@
                 @endforeach
                 </div>
 
-{{--                {{ $products->appends(request()->input())->links()}}--}}
+{{-- {{ $products->appends(request()->input())->links()}}--}}
 
 
             </div><!-- Wrapper -->
