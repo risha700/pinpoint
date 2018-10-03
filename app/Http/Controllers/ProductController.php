@@ -128,7 +128,7 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, Product $product)
     {
 
 //                if(!$request->file('file')) {flash()->error('Please choose a file ','');return back();}
@@ -150,7 +150,7 @@ class ProductController extends Controller
 
             ImageOptimizer::optimize($file, $path);
 
-            $product = Product::where('id', $request->id)->firstOrFail();
+//            $product = Product::where('id', $request->id)->firstOrFail();
 
             $product->photos()->create(['path' => "/product/photos/{$fileName}"]);
             flash()->success('Uploaded successfully', '');
