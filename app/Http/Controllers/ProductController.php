@@ -128,7 +128,7 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request)
     {
 
 //                if(!$request->file('file')) {flash()->error('Please choose a file ','');return back();}
