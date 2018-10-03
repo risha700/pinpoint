@@ -8,14 +8,14 @@ Breadcrumbs::for('home', function ($trail) {
 // Home > Shop
 Breadcrumbs::for('product', function ($trail) {
     $trail->parent('home');
-    $trail->push('Shop', route('product.index'));
+    $trail->push('Shop', route('shop.index'));
 
 });
 
 // Home > Product > [id]
 Breadcrumbs::for('showProduct', function ($trail, $product) {
     $trail->parent('product');
-    $trail->push( $product->name , route('product.show', $product->slug) );
+    $trail->push( $product->name , route('shop.show', $product->slug) );
 
 
 
