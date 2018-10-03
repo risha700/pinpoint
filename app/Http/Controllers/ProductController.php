@@ -152,7 +152,10 @@ class ProductController extends Controller
 
 //            $product = Product::where('id', $request->id)->firstOrFail();
 
-            $product->photos()->forceCreate(['path' => "/product/photos/{$fileName}"]);
+            $product->photos()->forceCreate([
+                'path' => "/product/photos/{$fileName}",
+                'product_id' => request()->product_id
+            ]);
             flash()->success('Uploaded successfully', '');
             return back();
 
