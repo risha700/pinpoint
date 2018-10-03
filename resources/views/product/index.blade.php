@@ -23,7 +23,7 @@
 
 
 
-                                        <a href="{{url('product', $product->slug)}}">
+                                        <a href="{{url('shop', $product->slug)}}">
                                             <img src="{{$product->photos->pluck('path')->first() ?:'product.jpg'}}" alt="{{$product->name}}" style="height: 200px; width: 100%;"/>
                                         </a>
                             </div>
