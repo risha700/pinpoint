@@ -145,7 +145,7 @@ class ProductController extends Controller
             $path = 'product/photos/'.$fileName;
 
             $img = Image::make($file)
-            ->resize(null, 400, function ($constraint) {
+            ->resize(null, 500, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             })->save();
