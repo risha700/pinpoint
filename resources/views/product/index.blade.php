@@ -30,7 +30,7 @@
                             <div class="uk-card-body">
                                 <span class="">{{presentPrice($product->price)}}</span>
 
-                                <h3 class="uk-card-title"><a href="/product/{{ $product->slug }}  ">{{$product->name}}</a></h3>
+                                <h3 class="uk-card-title"><a href="{{url('shop', $product->slug)}}">{{$product->name}}</a></h3>
                                 <p>{{$product->details}}</p>
                             </div>
                             <div class="uk-card-footer uk-flex uk-flex-around">
