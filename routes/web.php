@@ -10,7 +10,7 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/shop/{product}', 'ProductController@show')->name('product.show');
-Route::post('/shop/{product}', 'ProductController@update')->name('upload');
+Route::post('/shop/{product}', 'ProductController@update')->name('product.upload');
 Route::resource('/shop', 'ProductController');
 
 
