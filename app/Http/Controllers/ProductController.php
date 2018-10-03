@@ -65,7 +65,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-
+        dd('called store');
 
         $file = $request->file('file');
         $fileName = time(). $file->getClientOriginalName();
@@ -132,7 +132,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-
+dd('called update');
 
 
 //                if(!$request->file('file')) {flash()->error('Please choose a file ','');return back();}
