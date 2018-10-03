@@ -21,6 +21,10 @@ class ProductController extends Controller
     public function index()
     {
 
+        if(request()->wantsJson()){
+            $products = Product::with('photos')->get();
+            return $products;
+        }
 
         if (request()->category){
 
@@ -31,29 +35,12 @@ class ProductController extends Controller
 
 
         }else{
-
-//            $products = Product::inRandomOrder()->take(12)->get();
-//            $products= $product->inStock()->paginate(12);
-
-
-                      $products = Product::paginate(12);
-//                      return $products;
-//                            $products = Product::has('photos')->get();
-//                            $photo = Product::with('photos')->get();
-
+            $products = Product::paginate(12);
         }
 
         $categories = Category::all();
 
 
-        if(request()->wantsJson()){
-
-//            $products = Product::paginate(12);
-////            $products= $product->inStock()->paginate(12);
-//
-            $products = Product::with('photos')->get();
-            return $products;
-        }
 
 
         return view('product.index', compact('products', 'categories'));
