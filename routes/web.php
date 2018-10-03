@@ -10,9 +10,13 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/product', 'ProductController');
+//Route::resource('/product', 'ProductController');
+Route::get('/product', 'ProductController@index');
+Route::get('/product/{product}/edit ', 'ProductController@edit');
+Route::get('/product/create ', 'ProductController@create');
 Route::get('/product/{product}', 'ProductController@show')->name('product.show');
 Route::post('/product/{product}', 'ProductController@update')->name('upload');
+Route::post('/product', 'ProductController@store');
 
 
 
