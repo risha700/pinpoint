@@ -68,7 +68,7 @@
 
 
                     <ul class="uk-iconnav uk-iconnav-vertical">
-                        <li><a href="{{route('product.index', ['category'=>$category->slug])}}" uk-icon="icon: plus">{{$category->name}}</a></li>
+                        <li><a href="{{route('shop.index', ['category'=>$category->slug])}}" uk-icon="icon: plus">{{$category->name}}</a></li>
                     </ul>
                 @endforeach
                 </div>
