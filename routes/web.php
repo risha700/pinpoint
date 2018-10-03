@@ -14,6 +14,7 @@ Route::post('/shop/{product}', 'ProductController@update')->name('upload');
 Route::resource('/shop', 'ProductController');
 
 
+
 Route::resource('cart', 'CartController');
 Route::resource('checkout', 'CheckoutController');
 

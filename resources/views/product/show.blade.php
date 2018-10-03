@@ -96,10 +96,9 @@
 {{--temporary adding product photos--}}
     <div class="js-upload uk-placeholder uk-text-center">
         <span uk-icon="icon: cloud-upload"></span>
-        <form action="{{ url('shop', $product->slug) }}" enctype="multipart/form-data" method="POST">
-        @csrf
+        <form action="{{ url('/shop', $product->slug) }}" enctype="multipart/form-data" method="POST">
+            @csrf
             {{ method_field('PATCH') }}
-            <input type="hidden" name="product-id" value="{{$product->id}}">
             <input type="file" name="file" id="file">
             <button type="submit">upload</button>
 
