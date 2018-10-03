@@ -48,7 +48,7 @@ class OrderPlaced extends Notification
                     ->line('Thanks for your order')
                     ->action('Track', url('/'))
                     ->line('Thank you for using our application!')
-                    ->attach('public/invoices/invoice'.$this->order->id.'.pdf', [
+                    ->attach('/public/invoices/invoice'.$this->order->id.'.pdf', [
                         'as' => 'Order#'.$this->order->id.'invoice.pdf',
                         'mime' => 'application/pdf',
                     ]);
