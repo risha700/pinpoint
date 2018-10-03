@@ -118,7 +118,7 @@ trait Billable
         $pdf = App::make('dompdf.wrapper');
         return $pdf->loadView('pdf.invoice',compact('order'))
 
-            ->save('/Users/Rs/storeta/storage/app/public/invoices/invoice'.$order->id.'.pdf');
+            ->save('public/orders/invoices/invoice'.$order->id.'.pdf');
 
     }
 

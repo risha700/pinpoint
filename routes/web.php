@@ -1,6 +1,7 @@
 <?php
 
 
+Auth::routes();
 
 Route::get('/', function () {
     return view('landing');
@@ -30,4 +31,3 @@ Route::post('wishlist', 'WishlistController@store')->name('wishlist.store');
 Route::post('wishlist/{product}', 'WishlistController@update')->name('cart.restore');
 Route::delete('wishlist/{product}', 'WishlistController@destroy')->name('wishlist.destroy');
 
-Auth::routes();
