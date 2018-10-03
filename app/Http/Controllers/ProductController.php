@@ -161,7 +161,6 @@ class ProductController extends Controller
 
 
         }catch (\Exception $e){
-            dd($e);
             flash()->error($e->getMessage(), '');
             return back();
         }
