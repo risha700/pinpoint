@@ -32,7 +32,7 @@
                 <!-- Wide nav -->
                 <div class="uk-navbar-right  uk-visible@m">
                     <ul class="uk-navbar-nav">
-                        <li  class="{{ set_active('product') }}"><a class="uk-button uk-button-text " href="{{ route('product.index') }}">Shop</a></li>
+                        <li  class="{{ set_active('product') }}"><a class="uk-button uk-button-text " href="{{ route('shop.index') }}">Shop</a></li>
                         <li  class="{{ set_active('cart') }}"><a class="uk-button uk-button-text " href="{{ route('cart.index') }}" uk-icon="cart"></a></li>
 
                         <li  class="{{ set_active('home') }}"><a class="uk-button uk-button-text bound " uk-icon="heart"></a>
