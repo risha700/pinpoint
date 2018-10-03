@@ -15,7 +15,7 @@ Route::get('/product', function (){
 });
 
 Route::get('/product/{product}', 'ProductController@update')->name('product.show');
-Route::post('/product/{product}', 'ProductController@update')->name('upload');
+//Route::post('/product/{product}', 'ProductController@update')->name('upload');
 Route::resource('/product', 'ProductController');
 
 
