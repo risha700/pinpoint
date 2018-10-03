@@ -9,10 +9,10 @@
 <body>
 
 
-<h1 style="text-align: center;">Thanks for your purchase <span>{{$order->name}}</span></h1>
+<h1 style="text-align: center;">Thanks for your purchase <span class="title">{{$order->name}}</span></h1>
 
 
-<table style="width: 100%; border: #5B7BB5">
+<table style="width: 100%; border: #5B7BB5" class="uk-table">
     <tr style="background: #5B7BB5;border:1px solid">
         <th>item</th>
         <th>Qty</th>
