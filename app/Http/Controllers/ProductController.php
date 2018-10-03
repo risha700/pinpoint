@@ -29,7 +29,7 @@ class ProductController extends Controller
 
 
         if(request()->wantsJson()){
-            
+
             $products = Product::with('photos')->get();
             return $products;
         }
