@@ -87,7 +87,7 @@ class CartController extends Controller
             return back();
         }
 
-        Cart::instance('default')->add($request->id, $request->name, $request->quantity = 1, $request->price )
+        Cart::instance('default')->add($request->id, $request->name, $request->quantity = 1, $request->price, ['options'=>$request->details])
             ->associate('App\Product');
 
         if ($request->wantsJson()){
