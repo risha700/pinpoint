@@ -79,7 +79,7 @@ trait Billable
 
         $content = Cart::instance('default')->content()->map(function ($item){
 
-            return $item->model->slug. ' | ' .$item->qty;
+            return $item->model->slug. ' | ' .$item->qty. ' | '.$item->options;
         })->values()->toJson();
 
         $originalAmount = Cart::instance('default')->total()/100;

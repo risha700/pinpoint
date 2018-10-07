@@ -1,23 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Photo;
-use App\Product;
-use Gloudemans\Shoppingcart\Facades\Cart;
+use App\Option;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
 
-class ApiController extends Controller
+class OptionController extends Controller
 {
-
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
-
     {
-       return $products = Product::with('photos', 'options')->paginate(9);
-
+        //
     }
 
     /**
@@ -41,30 +38,24 @@ class ApiController extends Controller
         //
     }
 
-
-    public function showCart()
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Option  $option
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Option $option)
     {
-
-
-            return response()->json([
-                'cartContent' => Cart::content(),
-                'cartTax' => Cart::tax(),
-                'cartSubtotal' => Cart::subtotal(),
-                'cartTotal' => Cart::total(),
-                'cartCount' => Cart::count(),
-            ]);
-
-
-
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Option  $option
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Option $option)
     {
         //
     }
@@ -73,10 +64,10 @@ class ApiController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Option  $option
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Option $option)
     {
         //
     }
@@ -84,10 +75,10 @@ class ApiController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Option  $option
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Option $option)
     {
         //
     }

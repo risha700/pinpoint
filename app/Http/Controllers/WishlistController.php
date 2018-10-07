@@ -22,6 +22,7 @@ class WishlistController extends Controller
         Cart::remove($id);
 
         $duplicates = Cart::instance('wishlist')->search(function ($cartItem, $rowId) use ($id) {
+
             return $rowId === $id;
         });
         if ($duplicates->isNotEmpty()) {
@@ -32,10 +33,7 @@ class WishlistController extends Controller
             return back();
         }
 
-
-
-
-        Cart::instance('wishlist')->add($item->id, $item->name, 1, $item->price)->associate('App\Product');
+        Cart::instance('wishlist')->add($item->id, $item->name, 1, $item->price, [presentOptions($item->options)])->associate('App\Product');
         if(\request()->wantsJson()){
             return response()->json('item has added to wish list', 203);
         }
@@ -54,6 +52,7 @@ class WishlistController extends Controller
     {
 
         $duplicates = Cart::instance('wishlist')->search(function ($cartItem, $rowId) use ($request) {
+
             return $cartItem->id ===  $request->id;
         });
         if ($duplicates->isNotEmpty()) {
@@ -94,10 +93,11 @@ class WishlistController extends Controller
         $item = Cart::instance('wishlist')->get($id);
 
 
-        $level = Product::where('id', $item->id)->firstOrFail();
+//        $product = Product::where('id', $item->id)->firstOrFail();
+        $product = Product::where('id', $item->id)->with('options')->firstOrFail();
 
 
-        if(!$level->stock > 0) {
+        if(!$product->stock > 0) {
             if(\request()->wantsJson()){
                 return response()->json('Sorry...out of stock', 302);
             }
@@ -112,6 +112,10 @@ class WishlistController extends Controller
 
 
         $duplicates = Cart::instance('default')->search(function ($cartItem, $rowId) use ($id) {
+//
+//            if ($product->options != $cartItem->options[0]){
+//                return false;
+//            }
             return $rowId === $id;
         });
 
@@ -119,17 +123,17 @@ class WishlistController extends Controller
             if(\request()->wantsJson()){
                 return response()->json('Item is already in your cart', 302);
             }
-            flash(null,'item already on your cart');
+            flash(null,'item is already in your cart');
 
             return redirect()->route('cart.index');
         }
 
         if(!$item->stock > 0) {
 
-            Cart::instance('default')->add($item->id, $item->name, 1, $item->price)
+            Cart::instance('default')->add($item->id, $item->name, 1, $item->price, [presentOptions($item->options)])
                 ->associate('App\Product');
             if(\request()->wantsJson()){
-                return response()->json('Item now in your shopping cart', 203);
+                return response()->json('Item now is in your shopping cart', 203);
             }
             flash()->success('Item now in your shopping cart', null);
 

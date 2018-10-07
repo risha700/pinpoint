@@ -38,8 +38,6 @@
                                         <img :src="image.path"  :alt="product.name" :key="index">
                                     </a>
                                 </li>
-
-
                             </ul>
                         </div>
 
@@ -51,13 +49,29 @@
 
 
 
-                    <div class="uk-padding-large">
+                    <div class="uk-padding">
                         <h1> {{product.name}}</h1>
                         <p> {{product.description}}</p>
                         <p>  {{product.price | moneyFormat}}</p>
+                        <div v-if="options">
+                            Available in
+                            <!--<v-select :items="manualForceUpdate(product)" label="choose color" @change="setSelectedVal($event)" >-->
+                                <!--<input type="hidden" v-model="selected" name="options"/>-->
+                            <!--</v-select>-->
+                            <v-radio-group v-model="selected">
+                                <v-radio
+
+                                        v-for="(p,i) in manualForceUpdate(product)"
+                                        :key="i"
+                                        :label="`${p}`"
+                                        :value="p"
+                                ></v-radio>
+                            </v-radio-group>
+                        </div>
                         <v-btn @click.native.prevent.stop="sendItemToCart(product)" class="uk-button primary uk-border-rounded" :key="product.id">
                             Add to cart <v-icon @click.prevent>add_shopping_cart</v-icon>
                         </v-btn>
+
 
                     </div>
 
@@ -68,11 +82,15 @@
 </template>
 
 <script>
+    import {mapGetters} from 'vuex'
+
     export default {
         data(){
             return{
                 product:'',
                 images:'',
+                options:'',
+                selected:''
             }
         },
         watch:{
@@ -81,32 +99,59 @@
                     this.images = [{'path':'/product.jpg'}]
                 }
             },
-        },
 
+        },
+        computed:{
+            ...mapGetters(['productOptions']),
+
+        },
         methods:{
-            sendItemToCart(product){
-                // window.events.$emit('AddToCart', product)
-                this.$store.dispatch('addToCart', product);
+            sendItemToCart(event){
+
+
+                if(this.options && this.selected){
+                    event.options = this.selected
+                }
+                this.$store.dispatch('addToCart', event);
+
                 if(this.$refs.modal){
                     UIkit.modal(this.$refs.modal).hide()
-                    this.product=''
-                    this.images=''
                 }
-
+                this.product=''
+                this.images=''
+                this.options = ''
+                this.selected=''
             },
+            setSelectedVal(e){
+                this.selected = e
+            },
+            manualForceUpdate(data){
+                let product = this.$store.state.cartProductList.find(i=>i.id==data.id)
+                if(Object(product).hasOwnProperty('options')) {
+                        return Object.values(product.options).map((o) => o.name)
+                }
+            }
         },
-        mounted(){
-            window.events.$on('quickView', (e) => {
+        created(){
+            window.events.$on('quickView', e => {
                 this.product = e
                 this.images = e.photos
-                if(UIkit.modal(this.$refs.modal)){
-                UIkit.modal(this.$refs.modal).show();
-                    }
+                //read from getters??
+                // if(!Array.isArray(this.options)){
+                //     this.options = this.manualForceUpdate(e)
 
+                // }
+                this.options = e.options
+                if(UIkit.modal(this.$refs.modal)){
+                    UIkit.modal(this.$refs.modal).show();
+                }
             });
         },
 
-
+        beforeCreate(){
+            //quick and dirty to make options available
+            this.$store.dispatch('loadAllProducts')
+        }
     }
 </script>
 

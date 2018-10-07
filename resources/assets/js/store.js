@@ -84,6 +84,14 @@ export default {
             if(Object(product).hasOwnProperty('stock')){
                 return  product.stock
             }
+        },
+        productOptions: (state) => (data) => {
+         let product = state.products.find((p)=> p.id == data.id)
+            if(Object(product).hasOwnProperty('options')){
+                // return product.options.map((o) => o.name)
+                return Object.values(product.options).map((o) => o.name)
+            }
+            // this.$forceUpdate();
         }
     },
     actions:{

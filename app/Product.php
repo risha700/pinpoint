@@ -29,6 +29,10 @@ class Product extends Model
 
         return $this->belongsToMany('\App\Category', 'product_category');
     }
+    public function options(){
+
+        return $this->hasMany('\App\Option');
+    }
 
 
 }

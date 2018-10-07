@@ -3480,6 +3480,23 @@ var api = '/api/product';
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__("./node_modules/vuex/dist/vuex.esm.js");
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3550,11 +3567,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             product: '',
-            images: ''
+            images: '',
+            options: '',
+            selected: ''
         };
     },
 
@@ -3565,28 +3586,57 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         }
     },
-
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["mapGetters"])(['productOptions'])),
     methods: {
-        sendItemToCart: function sendItemToCart(product) {
-            // window.events.$emit('AddToCart', product)
-            this.$store.dispatch('addToCart', product);
+        sendItemToCart: function sendItemToCart(event) {
+
+            if (this.options && this.selected) {
+                event.options = this.selected;
+            }
+            this.$store.dispatch('addToCart', event);
+
             if (this.$refs.modal) {
                 UIkit.modal(this.$refs.modal).hide();
-                this.product = '';
-                this.images = '';
+            }
+            this.product = '';
+            this.images = '';
+            this.options = '';
+            this.selected = '';
+        },
+        setSelectedVal: function setSelectedVal(e) {
+            this.selected = e;
+        },
+        manualForceUpdate: function manualForceUpdate(data) {
+            var product = this.$store.state.cartProductList.find(function (i) {
+                return i.id == data.id;
+            });
+            if (Object(product).hasOwnProperty('options')) {
+                return Object.values(product.options).map(function (o) {
+                    return o.name;
+                });
             }
         }
     },
-    mounted: function mounted() {
+    created: function created() {
         var _this = this;
 
         window.events.$on('quickView', function (e) {
             _this.product = e;
             _this.images = e.photos;
+            //read from getters??
+            // if(!Array.isArray(this.options)){
+            //     this.options = this.manualForceUpdate(e)
+
+            // }
+            _this.options = e.options;
             if (UIkit.modal(_this.$refs.modal)) {
                 UIkit.modal(_this.$refs.modal).show();
             }
         });
+    },
+    beforeCreate: function beforeCreate() {
+        //quick and dirty to make options available
+        this.$store.dispatch('loadAllProducts');
     }
 });
 
@@ -3821,6 +3871,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_shop_WishList___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_shop_WishList__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
 //
 //
 //
@@ -4379,6 +4430,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         _this.reportErr();
                         UIkit.notification(Object.values(errors.errors), { status: 'danger' });
                         _this.loading = false;
+                        // this.form.stripeToken=''
+
                     });
                 });
             }
@@ -4672,7 +4725,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -4732,7 +4785,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -4762,7 +4815,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -55329,7 +55382,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "uk-padding-large" },
+                { staticClass: "uk-padding" },
                 [
                   _c("h1", [_vm._v(" " + _vm._s(_vm.product.name))]),
                   _vm._v(" "),
@@ -55340,6 +55393,40 @@ var render = function() {
                       "  " + _vm._s(_vm._f("moneyFormat")(_vm.product.price))
                     )
                   ]),
+                  _vm._v(" "),
+                  _vm.options
+                    ? _c(
+                        "div",
+                        [
+                          _vm._v(
+                            "\n                        Available in\n                        "
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-radio-group",
+                            {
+                              model: {
+                                value: _vm.selected,
+                                callback: function($$v) {
+                                  _vm.selected = $$v
+                                },
+                                expression: "selected"
+                              }
+                            },
+                            _vm._l(_vm.manualForceUpdate(_vm.product), function(
+                              p,
+                              i
+                            ) {
+                              return _c("v-radio", {
+                                key: i,
+                                attrs: { label: "" + p, value: p }
+                              })
+                            })
+                          )
+                        ],
+                        1
+                      )
+                    : _vm._e(),
                   _vm._v(" "),
                   _c(
                     "v-btn",
@@ -55690,7 +55777,7 @@ var render = function() {
                               _vm._v(" "),
                               _c(
                                 "v-list-tile",
-                                { key: item.id },
+                                { key: item.rowId },
                                 [
                                   _c("v-list-tile-action", [
                                     _c("img", {
@@ -55724,6 +55811,12 @@ var render = function() {
                                       _c("v-list-tile-sub-title", {
                                         domProps: {
                                           innerHTML: _vm._s(item.rowId)
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("v-list-tile-sub-title", {
+                                        domProps: {
+                                          innerHTML: _vm._s(item.options[0])
                                         }
                                       })
                                     ],
@@ -56002,7 +56095,7 @@ var render = function() {
                 [
                   _c(
                     "v-card",
-                    { staticClass: "pa-3", attrs: { color: "teal" } },
+                    { staticClass: "pa-3" },
                     [
                       _c("v-card-text", [
                         _c("h1", { attrs: { color: "white" } }, [
@@ -93899,6 +93992,20 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 if (Object(product).hasOwnProperty('stock')) {
                     return product.stock;
                 }
+            };
+        },
+        productOptions: function productOptions(state) {
+            return function (data) {
+                var product = state.products.find(function (p) {
+                    return p.id == data.id;
+                });
+                if (Object(product).hasOwnProperty('options')) {
+                    // return product.options.map((o) => o.name)
+                    return Object.values(product.options).map(function (o) {
+                        return o.name;
+                    });
+                }
+                // this.$forceUpdate();
             };
         }
     },

@@ -37,6 +37,9 @@
                         <td>
                             {{$item->model->details}}
                             {{$item->qty}}
+                            {{presentPrice($item->model->price)}}/unit |
+                            {{--{{$item->options[0]?:''}}--}}
+                            {{presentOptions($item->options)}}
                         </td>
 
                         <td>
@@ -51,6 +54,8 @@
                                     </select>
                                 </div>
                             </div>
+
+
                         </td>
                         {{--<td><button class="uk-button uk-button-default" type="button"></button></td>--}}
                         {{--<td><a href="#" class="uk-text-danger" uk-icon="icon:trash;ratio:1.3;"></a></td>--}}
@@ -148,7 +153,7 @@
                 <h2 class="uk-article-title">
                     Your Cart is empty
                 </h2>
-                <a class="uk-button uk-button-secondary" href="{{url('product')}}">Go Shopping</a>
+                <a class="uk-button uk-button-secondary" href="{{url('shop')}}">Go Shopping</a>
             </div>
         </div>
 @endif

@@ -16,7 +16,9 @@
                         <td><a href="{{ route('product.show', $item->model->slug ) }}">{{$item->model->name}}</a>
                         </td>
 
-                        {{--<td>{{presentPrice($item->model->price)}}</td>--}}
+                        <td>    {{presentPrice($item->model->price)}}/unit |
+                            {{presentOptions($item->options)}}
+                        </td>
 
                         <td class="uk-flex">
 

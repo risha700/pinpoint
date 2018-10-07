@@ -46,7 +46,7 @@
 
                             <v-divider></v-divider>
 
-                            <v-list-tile :key="item.id">
+                            <v-list-tile :key="item.rowId">
                                 <v-list-tile-action>
                                     <img class="pr-2" :src="setPhotos(item)"  @click="quickView(item)" width="100px;" >
                                 </v-list-tile-action>
@@ -54,6 +54,7 @@
                                 <v-list-tile-content>
                                     <v-list-tile-title v-html="item.name" @click="quickView(item)"></v-list-tile-title>
                                     <v-list-tile-sub-title v-html="item.rowId"></v-list-tile-sub-title>
+                                    <v-list-tile-sub-title v-html="item.options[0]"></v-list-tile-sub-title>
                                 </v-list-tile-content>
 
                                 <v-list-tile-action>
@@ -135,7 +136,7 @@
 
         <v-layout row wrap v-if="cart.cartCount==0">
             <v-container text-sm-center >
-                <v-card class="pa-3" color="teal">
+                <v-card class="pa-3" >
                     <v-card-text><h1 color="white">Your cart is empty</h1></v-card-text>
                     <v-btn color="white" to="/shop"><v-icon color="warning">shopping_cart</v-icon>Go Shopping</v-btn>
                 </v-card>

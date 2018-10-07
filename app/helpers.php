@@ -26,3 +26,6 @@ function presentPrice($price){
     return money_format('$%i', $price / 100);
 
 }
+function presentOptions($options){
+    return str_replace(array('[','"',']'),'',$options);
+}

@@ -348,12 +348,14 @@
                                     this.reportErr();
                                     UIkit.notification(Object.values(errors.errors), {status:'danger'} )
                                     this.loading = false;
+                                    // this.form.stripeToken=''
 
 
                                 }
                             );
 
                     });
+
 
                 }
             },
