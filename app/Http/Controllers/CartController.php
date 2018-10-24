@@ -29,10 +29,10 @@ class CartController extends Controller
 
 
         }
-
-
         $slug = Product::pluck('slug');
         $product = Product::where('slug', $slug)->firstOrFail();
+
+
 //        $wishlist = Product::where('slug','!=', $slug)->inRandomOrder()->take(3)->get();
         // $mightAlsoLike = Product::inRandomOrder()->take(3)->get();
 
@@ -62,11 +62,13 @@ class CartController extends Controller
 
         $duplicates = Cart::instance('default')->search(function ($cartItem, $rowId) use ($request) {
 
-            if( $request->options != [] && isset($cartItem->options[0])){
-                if ($request->options != $cartItem->options[0]){
-                    return false;
-                }
-            }
+//            TODO:needs a fix
+
+//            if( $request->options != [] && isset($cartItem->options[0])){
+//                if ($request->options != $cartItem->options[0]){
+//                    return false;
+//                }
+//            }
 
             return $cartItem->id ===  $request->id;
 
@@ -86,7 +88,7 @@ class CartController extends Controller
 
         }
 
-//
+
         if(!$product->stock > 0){
 
             if ($request->wantsJson()){
@@ -96,10 +98,12 @@ class CartController extends Controller
 
             return back();
         }
+        if(sizeof(getOpsRequest($request))){
 
-        if($request->options){
-            Cart::instance('default')->add($request->id, $request->name, $request->quantity = 1, $request->price, [presentOptions($request->options)] )
-                ->associate('App\Product');
+            Cart::instance('default')->add($request->id, $request->name, $request->quantity = 1, $request->price,
+                cart_options_array($request->all())
+            )->associate('App\Product');
+
         }else{
 
             Cart::instance('default')->add($request->id, $request->name, $request->quantity = 1, $request->price)

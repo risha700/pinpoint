@@ -39,7 +39,19 @@
                             {{$item->qty}}
                             {{presentPrice($item->model->price)}}/unit |
                             {{--{{$item->options[0]?:''}}--}}
-                            {{presentOptions($item->options)}}
+{{--                            {{dd(sizeof($item->options))}}--}}
+                                {{--@foreach(getItemOrIndex($item->options) as $key=>$val)--}}
+                                @foreach($item->options as $key=>$val)
+                                <p>
+                                    {{--{{dd(current($item->options) )}}--}}
+
+                                    {{--{{$key}}--}}
+                                    {{--{{$val}}--}}
+                                    {{set_option_name($key)}} :
+                                    {{$val}}
+                                </p>
+
+                            @endforeach
                         </td>
 
                         <td>

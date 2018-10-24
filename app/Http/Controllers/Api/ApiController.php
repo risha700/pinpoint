@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Category;
 use App\Photo;
 use App\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -16,7 +17,10 @@ class ApiController extends Controller
     public function index()
 
     {
-       return $products = Product::with('photos', 'options')->paginate(9);
+
+
+//       return $products = Product::with('photos', 'options','categories')->paginate(9);
+       return $products = Product::paginate(9);
 
     }
 
@@ -76,9 +80,12 @@ class ApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update()
     {
-        //
+
+        $cat = Category::with('products')->get();
+
+        return response()->json($cat);
     }
 
     /**

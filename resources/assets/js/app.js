@@ -46,6 +46,8 @@ Vue.filter('moneyFormat', (number)=>{
 });
 Vue.prototype.$scrollToTop = () => window.scrollTo(0,0)
 
+Vue.prototype.authorize = (handler)=>{let user = window.App.user;return user ? handler(user) : false};
+
 const app = new Vue({
     el: '#app',
     router,

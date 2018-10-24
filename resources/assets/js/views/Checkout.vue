@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <v-container>
         <v-progress-linear
                 :value="progress"
                 :color="color()"
@@ -11,7 +11,7 @@
         <v-form ref="form" v-model="valid" @submit.prevent="onSubmit" @keydown.native.stop="form.errors.clear($event.target.name)" lazy-validation id="payment-form">
 
 
-            <v-stepper v-model="step" ref="stepper">
+            <v-stepper v-model="step" ref="stepper" >
 
                 <v-stepper-header>
                     <template v-for="n in steps">
@@ -213,7 +213,7 @@
             </v-stepper>
 
         </v-form>
-    </div>
+    </v-container>
 
 </template>
 
@@ -371,6 +371,7 @@
                 let dataArray = Object.keys(this.form.data())
                 // dataArray.filter((e,i)=> e == errField[0] ? this.step = i+1 :null)
                 dataArray.filter((e,i)=> e == errField[0] ? this.step = i :null)
+
             },
             stepInputErr(f){
                 return this.valid && !this.form.errors.any() && f === this.step || f>this.step || f<this.step

@@ -3,8 +3,9 @@
         <mini-drawer></mini-drawer>
 
         <!--Menu-->
-        <v-toolbar fixed  app dense card nudge-top fadeIn v-scroll="onScroll"
-                   :color="menuColor? menuColor :'transparent' "
+
+            <v-toolbar fixed  app dense card nudge-top fadeIn v-scroll="onScroll"
+                       :style="menuColor?menuColor: 'background-color: transparent;'"
 
 
         >
@@ -15,9 +16,10 @@
 
             <div class="uk-navbar-center">
                 <v-toolbar-title class="uk-text-primary">
-                    <img src="logo.svg" width="50" height="60" alt=""
-                         style="stroke: #6a1b9a;stroke-width:20px"
-                         uk-svg>
+                    <img src="/images/pinpointoptics.png" width="120" height="100" alt=""
+                         style="stroke: #6a1b9a;stroke-width:20px">
+
+
                 </v-toolbar-title></div>
             <v-spacer></v-spacer>
 
@@ -38,20 +40,22 @@
 
         </v-toolbar>
         <!--home hero section-->
-        <portal-target name="hero"></portal-target>
+        <portal-target name="hero" ref="protalHero"></portal-target>
+        <!--Full width for designing-->
+        <portal-target name="fullWidth"></portal-target>
+
         <v-content @click.native="minifyDrawer">
 
             <v-layout row wrap>
                 <flash></flash>
-                <v-container>
-                    <router-view></router-view>
-                </v-container>
+                <router-view></router-view>
             </v-layout>
 
             <!--<v-container grid-list-md text-xs-center>-->
 
             <!--</v-container>-->
         </v-content>
+
 
     </div>
 </template>
@@ -70,22 +74,15 @@
                 menuColor:'',
                 router:this.$router,
                 store:this.$store,
-                color:'',
-                cards: [
-                    { text: 'hello hello',  icon:'check_circle_outline'},
-                    { text: 'Bar Bar' ,icon:'face'},
-                    { text: 'Foo FOO' ,icon:'flight_takeoff'},
-                ],
-
-
             }
         },
-
 
         methods:{
             onScroll (e) {
                 this.offsetTop = window.pageYOffset || document.documentElement.scrollTop
-                this.offsetTop > 200 ? this.menuColor = 'blue-grey lighten-1': this.menuColor = 'transparent';
+                this.offsetTop > this.$refs.protalHero.$el.clientHeight ?
+                    this.menuColor = 'background-image: linear-gradient(to right top, #845EC2, #D65DB1, #FF6F91, #FF9671, #FFC75F,#F9F871);background-size:cover;':
+                    this.menuColor = 'background-color: transparent;';
             },
             toggleMiniDrawer(){
 
@@ -94,7 +91,8 @@
             minifyDrawer(){
                 window.events.$emit('minifyDrawer');
 
-            }
+            },
+
         },
         mounted(){
                 this.$store.dispatch('fetchCart');

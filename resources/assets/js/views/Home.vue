@@ -1,18 +1,27 @@
 <template>
     <div>
         <portal to="hero">
-            <v-jumbotron
-                    style="background:url('/topography.svg') no-repeat center, linear-gradient(to right top, #845EC2, #D65DB1, #FF6F91, #FF9671, #FFC75F,#F9F871);background-size:cover;"
-                    dark
+            <v-responsive class="uk-height-large hero"
+
+            style="background-image: url('/svg/diagonal-lines.svg'), linear-gradient(to right top, #845EC2, #D65DB1, #FF6F91, #FF9671, #FFC75F,#F9F871);
+            background-repeat:repeat;
+            background-position: center bottom;
+            background-size:inherit;
+            background-blend-mode:soft-light; "
+
+
             >
+
                 <v-container  fill-height>
                     <v-layout align-center>
                         <v-flex text-xs-center>
-                            <h3 class="display-3">Home</h3>
+
+                            <h3 class="display-3">Clearly The BEST</h3>
+
                         </v-flex>
                     </v-layout>
                 </v-container>
-            </v-jumbotron>
+            </v-responsive>
         </portal>
 
 
@@ -39,5 +48,9 @@
 </script>
 
 <style scoped>
+    .hero{
+
+
+    }
 
 </style>

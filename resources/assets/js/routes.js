@@ -19,7 +19,7 @@ let routes=[
 
         path:'/bag',
         component:require('./views/Cart.vue'),
-        icon:'shopping_cart'
+        icon:'shopping_basket'
     },
     {  path:'/checkout',
         component:require('./views/Checkout.vue'),

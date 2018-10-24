@@ -6,7 +6,6 @@
             hide-overlay
             app
             dark
-            mini-variant
             stateless
             value="true"
     >
@@ -14,7 +13,8 @@
             <v-list class="pa-0">
                 <v-list-tile avatar>
                     <v-list-tile-avatar>
-                        <v-icon>account_circle</v-icon>
+                      <!--<img src="/images/pinpointoptics.png" width="120" height="120" alt="">-->
+                        <v-icon large>face</v-icon>
                     </v-list-tile-avatar>
                     <v-list-tile-content>
                         <v-list-tile-title></v-list-tile-title>

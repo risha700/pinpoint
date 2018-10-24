@@ -22,7 +22,8 @@ class ProductController extends Controller
     {
 
         if(request()->wantsJson()){
-            $products = Product::with('photos','options')->get();
+
+            $products = Product::get();
             return $products;
         }
 
@@ -103,8 +104,11 @@ class ProductController extends Controller
     {
 
 //        $product = Product::find($id);
-
         $product = Product::where('slug','=',$slug)->firstOrFail();
+
+//        dd($product->options);
+//        $t= sort_array_of_array($product->options, 'name', 'type');
+//        dd($t['color']);
 
         return view('product.show', compact('product'));
 

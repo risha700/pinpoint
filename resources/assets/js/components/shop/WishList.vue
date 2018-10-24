@@ -9,7 +9,7 @@
                     justify-center
 
             >
-                <v-icon color="primary" dark large>info</v-icon> <p >Your wish list</p>
+                <v-icon color="orange" dark large>info_outlined</v-icon> <p >Your wish list</p>
             </v-flex>
             </div>
             <v-card raised>
@@ -29,7 +29,7 @@
                                 <img @click="quickView(item)" class="pr-2" :src="setPhotos(item)"   width="100px;" >
                             </v-list-tile-avatar>
                             <v-list-tile-content>
-                                <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+                                <v-list-tile-title>{{ item.name.slice(0,15) }}...</v-list-tile-title>
                                 <v-list-tile-sub-title>{{item.price | moneyFormat}}</v-list-tile-sub-title>
                             </v-list-tile-content>
                             <v-list-tile-action>
@@ -94,7 +94,7 @@
                 window.events.$emit('quickView', product);
             },
 
-        }
+        },
     }
 </script>
 

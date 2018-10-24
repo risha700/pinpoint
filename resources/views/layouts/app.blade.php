@@ -17,7 +17,12 @@
         {{--<script aysnc defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDow6F37BCP8VXNozK60grjdloSEz_c5c&libraries=places"></script>--}}
         {{--<script aysnc defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDow6F37BCP8VXNozK60grjdloSEz_c5c"></script>--}}
         <script src="https://js.stripe.com/v3/"></script>
-
+        <script>
+            window.App = {!! json_encode([
+        'user' => Auth::user(),
+        'signedIn' => Auth::check()
+                        ]) !!};
+        </script>
     </head>
     <body>
 

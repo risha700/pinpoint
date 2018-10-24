@@ -33,7 +33,8 @@ class WishlistController extends Controller
             return back();
         }
 
-        Cart::instance('wishlist')->add($item->id, $item->name, 1, $item->price, [presentOptions($item->options)])->associate('App\Product');
+        Cart::instance('wishlist')->add($item->id, $item->name, 1, $item->price,
+            cart_options_array(presentOptions($item->options)))->associate('App\Product');
         if(\request()->wantsJson()){
             return response()->json('item has added to wish list', 203);
         }
@@ -130,7 +131,10 @@ class WishlistController extends Controller
 
         if(!$item->stock > 0) {
 
-            Cart::instance('default')->add($item->id, $item->name, 1, $item->price, [presentOptions($item->options)])
+
+            Cart::instance('default')->add($item->id, $item->name, 1, $item->price,
+                cart_options_array(presentOptions($item->options)))
+//                [reformatWishListOptionsArray(presentOptions($item->options))])
                 ->associate('App\Product');
             if(\request()->wantsJson()){
                 return response()->json('Item now is in your shopping cart', 203);

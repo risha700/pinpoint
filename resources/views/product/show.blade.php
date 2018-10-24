@@ -83,11 +83,30 @@
                             <input type="hidden" name="name" value="{{$product->name }}">
                             <input type="hidden" name="price" value="{{$product->price }}">
                             Available in:
-                            <select name="options" class="uk-select">
-                                @foreach($product->options as $option)
-                                    <option value="{{$option->name}}">{{$option->name}}</option>
-                                @endforeach
-                            </select>
+
+                            @foreach($product->options as $key => $option)
+                                {{$key}}
+                                <select name="options-{{$key}}" class="uk-select uk-border-rounded">
+                                    @foreach($option as $i=>$val)
+                                        <option value="{{$val}}">{{$val}}</option>
+                                    @endforeach
+                                </select>
+                            @endforeach
+
+                            {{--<select name="options" class="uk-select">--}}
+                                {{--@foreach($product->options as $option)--}}
+                                    {{--<option value="{{$option->name}}">{{$option->type}}</option>--}}
+                                {{--@endforeach--}}
+                            {{--</select>--}}
+                            {{--@foreach(sort_array_of_array($product->options, 'name', 'type') as $key=>$option)--}}
+                                {{--{{$key}}--}}
+                                {{--<select name="options-{{$key}}" class="uk-select uk-border-rounded">--}}
+                                    {{--@foreach($option as $value)--}}
+                                       {{--<option value="{{$value}}">{{$value}}</option>--}}
+                                    {{--@endforeach--}}
+                                {{--</select>--}}
+                            {{--@endforeach--}}
+
                             <button type="submit" class="uk-button uk-button-secondary uk-border-rounded">Add to cart</button>
                         </form>
                     </div>

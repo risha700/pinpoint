@@ -1,43 +1,45 @@
 <template>
+    <v-container>
+        <portal to="hero">
+            <v-responsive
+                    class="uk-height-max-medium"
+                    style="background-image: linear-gradient(to right top, #845EC2, #D65DB1, #FF6F91, #FF9671, #FFC75F,#F9F871);background-size:cover;"
+                    dark
 
-    <div>
-        <v-container>
-            <div>
-                <p class="uk-text-lead uk-text-center">
-                    Shopping Cart
-                </p>
-            </div>
-        </v-container>
-        <v-divider></v-divider>
+            >
+                <v-container  fill-height>
+                    <v-layout align-center>
+                        <v-flex text-xs-center>
 
-        <v-layout row wrap v-if="cart.cartCount>0" >
-            <v-flex xs12 sm8 class="pa-2" >
-                <v-card raised>
-
-                    <v-layout
-                            align-baseline
-                            row
-                            wrap
-                            d-flex
-                            pt-2
-                    >
-                        <v-subheader xs9>
-                            <p>You have <span v-text="cart.cartCount"></span> {{cart.cartCount > 1 ?'items':'item'}} in your cart</p>
-                        </v-subheader>
-                        <v-flex
-                            d-inline-flex
-                            align-baseline
-                            align-content-end
-                            justify-content-end
-                        >
-
-                            <v-spacer></v-spacer>
-
-                            <p>Qty</p>
-                            <p>Price</p>
+                            <h3 class="display-3">Shopping Cart</h3>
 
                         </v-flex>
                     </v-layout>
+                </v-container>
+            </v-responsive>
+        </portal>
+        <v-divider v-if="cart.cartCount!=0"></v-divider>
+
+        <v-layout row wrap v-if="cart.cartCount>0" >
+
+            <v-flex class="pr-1">
+                <v-card raised>
+
+                    <v-container>
+                        <v-layout row wrap>
+                            <v-flex sm10>
+                                <p ><span  class="uk-text-success"><span v-text="cart.cartCount"></span> {{cart.cartCount > 1 ?'items':'item'}} </span>in your cart</p>
+                            </v-flex>
+                            <v-flex d-inline-flex >
+
+                                <!--<v-spacer></v-spacer>-->
+
+                                <v-label>Qty</v-label>
+                                <v-label>Price<small class="uk-text-success">|each</small></v-label>
+
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
 
 
                     <v-list three-line>
@@ -53,13 +55,19 @@
 
                                 <v-list-tile-content>
                                     <v-list-tile-title v-html="item.name" @click="quickView(item)"></v-list-tile-title>
-                                    <v-list-tile-sub-title v-html="item.rowId"></v-list-tile-sub-title>
-                                    <v-list-tile-sub-title v-html="item.options[0]"></v-list-tile-sub-title>
+                                    <!--<v-list-tile-sub-title v-html="item.rowId"></v-list-tile-sub-title>-->
+
+
+                                    <template v-for="(ops,i) in item.options">
+                                        <v-list-tile-sub-title>
+                                                <i> {{ presentOptions(i) }} : {{ops}}</i>
+                                        </v-list-tile-sub-title>
+                                    </template>
+
                                 </v-list-tile-content>
 
                                 <v-list-tile-action>
-
-                                <select class="uk-select uk-border-rounded" @change="updateQty(item, $event.target.value)">
+                              <select class="uk-select uk-border-rounded" @change="updateQty(item, $event.target.value)">
                                         <option
                                             class="uk-input"
                                             v-for="(val, i) in productStock(item)"
@@ -68,13 +76,14 @@
                                             :selected="item.qty == val ? 'selected' :''"
                                         >{{val}}</option>
                                     </select>
+
+                                        <!--<v-chip outline color="success" class="subheading"> {{item.price | moneyFormat}} </v-chip>-->
+
                                 </v-list-tile-action>
                                 <v-list-tile-action>
-                                    <v-container class="mr-3">
-                                        <!--<v-list-tile-title>{{item.price | moneyFormat}}</v-list-tile-title>-->
-                                        <v-chip outline color="success" class="subheading"> {{item.price | moneyFormat}}</v-chip>
 
-                                    </v-container>
+                                   <v-chip outline color="success" class="subheading"> <small>{{item.price | moneyFormat}}</small></v-chip>
+
                                 </v-list-tile-action>
                             </v-list-tile>
                             <v-container>
@@ -94,8 +103,8 @@
                 </v-card>
 
             </v-flex>
-            <v-flex>
-                <v-flex class="pr-0" >
+            <v-flex xs12 sm4>
+                <v-flex class="pr-0 pt-1" >
                     <div data-uk-sticky="offset: 50;">
                         <v-card raised>
                             <v-list one-line>
@@ -134,27 +143,20 @@
 
 
 
-        <v-layout row wrap v-if="cart.cartCount==0">
-            <v-container text-sm-center >
-                <v-card class="pa-3" >
-                    <v-card-text><h1 color="white">Your cart is empty</h1></v-card-text>
-                    <v-btn color="white" to="/shop"><v-icon color="warning">shopping_cart</v-icon>Go Shopping</v-btn>
-                </v-card>
-
-            </v-container>
-
-        </v-layout>
 
         <quick-view></quick-view>
-    </div>
+        <portal to="fullWidth"><empty-cart  v-if="cart.cartCount==0"></empty-cart></portal>
+    </v-container>
+
 </template>
 
 <script>
     import {mapState, mapGetters} from 'vuex'
     import WishList from "../components/shop/WishList";
+    import EmptyCart from "../components/shop/EmptyCart";
     export default {
         name: "Cart",
-        components: {WishList},
+        components: { WishList, EmptyCart},
         data(){
           return{
               headers:['Price', 'Quantity']
@@ -177,6 +179,7 @@
                 this.$store.dispatch('removeItem', [item, i])
             },
             addToWishList(item,i) {
+
                 this.$store.dispatch('addToWishList', item)
             },
             quickView(item){
@@ -192,6 +195,11 @@
                     }
                 }
                     return '/product.jpg'
+            },
+            presentOptions(arr){
+
+                    return  arr.replace(/(options-)/, '  ')
+
             }
 
 
@@ -204,6 +212,6 @@
     }
 </script>
 
-<style scoped>
+<style >
 
 </style>

@@ -8,7 +8,7 @@ class Product extends Model
 {
     protected $guarded=[];
 
-//    protected $with = [ 'photos'];
+    protected $with = [ 'photos', 'options','categories'];
 
     public function photos(){
 
@@ -31,8 +31,14 @@ class Product extends Model
     }
     public function options(){
 
-        return $this->hasMany('\App\Option');
+        return $this->belongsToMany('\App\Option','product_option');
     }
 
+    public function getOptionsAttribute(){
+        return $this->attributes['options'] = sort_array_of_array($this->options()->get(), 'name', 'type');
+    }
+    public function setOptionsAttribute(){
+        return $this->attributes['options'] = $this->options;
+    }
 
 }
