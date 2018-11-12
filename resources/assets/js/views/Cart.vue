@@ -2,23 +2,22 @@
     <v-container>
         <portal to="hero">
             <v-responsive
-                    class="uk-height-max-medium"
+                    class="uk-height-small"
                     style="background-image: linear-gradient(to right top, #845EC2, #D65DB1, #FF6F91, #FF9671, #FFC75F,#F9F871);background-size:cover;"
                     dark
 
             >
                 <v-container  fill-height>
                     <v-layout align-center>
-                        <v-flex text-xs-center>
+                        <v-container text-xs-center>
+                                <div class="uk-animation-scale-up uk-heading-line"><h3 class="display-1 page_name">Shopping Cart</h3></div>
 
-                            <h3 class="display-3">Shopping Cart</h3>
-
-                        </v-flex>
+                        </v-container>
                     </v-layout>
                 </v-container>
             </v-responsive>
         </portal>
-        <v-divider v-if="cart.cartCount!=0"></v-divider>
+        <!--<v-divider v-if="cart.cartCount!=0"></v-divider>-->
 
         <v-layout row wrap v-if="cart.cartCount>0" >
 
@@ -28,7 +27,7 @@
                     <v-container>
                         <v-layout row wrap>
                             <v-flex sm10>
-                                <p ><span  class="uk-text-success"><span v-text="cart.cartCount"></span> {{cart.cartCount > 1 ?'items':'item'}} </span>in your cart</p>
+                                <p ><span  class="uk-text-success">#<span v-text="cart.cartCount"></span> {{cart.cartCount > 1 ?'items':'item'}} </span>in your cart</p>
                             </v-flex>
                             <v-flex d-inline-flex >
 
@@ -67,7 +66,7 @@
                                 </v-list-tile-content>
 
                                 <v-list-tile-action>
-                              <select class="uk-select uk-border-rounded" @change="updateQty(item, $event.target.value)">
+                                     <select class="uk-select uk-border-rounded" @change="updateQty(item, $event.target.value)">
                                         <option
                                             class="uk-input"
                                             v-for="(val, i) in productStock(item)"
@@ -76,9 +75,6 @@
                                             :selected="item.qty == val ? 'selected' :''"
                                         >{{val}}</option>
                                     </select>
-
-                                        <!--<v-chip outline color="success" class="subheading"> {{item.price | moneyFormat}} </v-chip>-->
-
                                 </v-list-tile-action>
                                 <v-list-tile-action>
 
@@ -103,7 +99,7 @@
                 </v-card>
 
             </v-flex>
-            <v-flex xs12 sm4>
+            <v-flex xs12 md4>
                 <v-flex class="pr-0 pt-1" >
                     <div data-uk-sticky="offset: 50;">
                         <v-card raised>
@@ -159,7 +155,8 @@
         components: { WishList, EmptyCart},
         data(){
           return{
-              headers:['Price', 'Quantity']
+              headers:['Price', 'Quantity'],
+              loading:false
 
           }
         },
@@ -213,5 +210,6 @@
 </script>
 
 <style >
+
 
 </style>

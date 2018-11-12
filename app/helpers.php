@@ -76,34 +76,35 @@
         return $ops;
 
     }
-function reformatWishListOptionsArray($input){
-    $n = str_replace(array('{','"','}'),'',$input);
-    $n = explode("," , $n);
+    function reformatWishListOptionsArray($input){
+        $n = str_replace(array('{','"','}'),'',$input);
+        $n = explode("," , $n);
 
-    for($i=0;$i<sizeof($n);$i++){
-        $n[$i]= explode(':',$n[$i]);
-    }
-    $nArr=[];
-    foreach ($n as $k=>$v){
-        $nArr[$k]=$v;
-    }
-
-    $zArr = [];
-  foreach ($nArr as $key=>$val){
-        $zArr[$nArr[$key][0]] = $nArr[$key][1];
-  }
-
-//  dd($zArr);
-    return $zArr;
-
-}
-
-
-function getItemOrIndex($item){
-
-        if(sizeof($item)==1){
-            return $item[0];
-        }else{
-            return $item;
+        for($i=0;$i<sizeof($n);$i++){
+            $n[$i]= explode(':',$n[$i]);
         }
-}
+        $nArr=[];
+        foreach ($n as $k=>$v){
+            $nArr[$k]=$v;
+        }
+
+        $zArr = [];
+      foreach ($nArr as $key=>$val){
+            $zArr[$nArr[$key][0]] = $nArr[$key][1];
+      }
+
+    //  dd($zArr);
+        return $zArr;
+
+    }
+
+
+    function getItemOrIndex($item){
+
+            if(sizeof($item)==1){
+                return $item[0];
+            }else{
+                return $item;
+            }
+
+    }

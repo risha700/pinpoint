@@ -1,6 +1,7 @@
 
 import Icons from 'uikit/dist/js/uikit-icons';
 import Form from './core/Form';
+import Vuetify from 'vuetify'
 
 window.Form = Form;
 window._ = require('lodash');
@@ -9,18 +10,16 @@ window.Popper = require('popper.js').default;
 window.Swal = require('sweetalert2');
 window.Vue = require('vue');
 window.Vuex = require('vuex');
-Vue.use(Vuex);
+
+
 try {
     window.$ = window.jQuery = require('jquery');
     window.UIkit = require('uikit');
     UIkit.use(Icons);
-
-    // require('bootstrap');
 } catch (e) {console.log(e)}
 
 
 window.axios = require('axios');
-// window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 let token = document.head.querySelector('meta[name="csrf-token"]');
 window.axios.defaults.headers.common = {
@@ -53,3 +52,18 @@ window.flash = function(message, level ='success'){
     window.events.$emit('flash', { message, level });
 
 };
+
+
+//vueJs settings
+Vue.use(Vuex);
+Vue.use(Vuetify, {
+    theme: {
+        primary: "#304FFE",
+        secondary: "#18FFFF",
+        accent: "#0d94b0",
+        error: "#FF5252",
+        warning: "#FFCA28",
+        info: "#2196f3",
+        success: "#00E676"
+    }
+});

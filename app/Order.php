@@ -12,6 +12,8 @@ use Notifiable , Billable;
 
     protected $guarded=[];
 
+    protected $with=['products'];
+
 
 
     public function user(){
@@ -19,7 +21,7 @@ use Notifiable , Billable;
     }
 
     public function products(){
-        return $this->belongsToMany('App\Product')->withPivot('quantity');
+        return $this->belongsToMany('App\Product','order_product')->withPivot('quantity');
     }
 
 
@@ -27,6 +29,16 @@ use Notifiable , Billable;
     {
         return $this->phone;
     }
-
+//    public function getProductsAttribute(){
+////        return $this->attributes['products'] = array_pull($this->products()->toArray(), 'options');
+//
+//
+//    }
+//    public function setProductsAttribute(){
+//
+//        dd($this->products);
+//        return $this->products();
+//
+//    }
 
 }

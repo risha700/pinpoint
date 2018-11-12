@@ -18,10 +18,18 @@ class ApiController extends Controller
 
     {
 
+//infinite loading setup
+//       return $products = Product::paginate(9);
+        if (request()->category){
 
-//       return $products = Product::with('photos', 'options','categories')->paginate(9);
-       return $products = Product::paginate(9);
+            $cat = Category::where('slug',request()->category)->with('products')->get();
+        }else{
 
+            $cat = Category::with('products')->get();
+        }
+
+
+        return response()->json($cat);
     }
 
     /**
@@ -83,7 +91,17 @@ class ApiController extends Controller
     public function update()
     {
 
-        $cat = Category::with('products')->get();
+        if (request()->category){
+
+            $cat = Product::with('categories')->whereHas('categories', function ($query){
+                $query->where('slug', request()->category);
+            })->get();
+
+        }else{
+
+            $cat = Category::with('products')->get();
+        }
+
 
         return response()->json($cat);
     }

@@ -1,13 +1,13 @@
 @inject('products', 'App\Product')
 
 @extends('layouts.app')
-@section('hero')
-    <div class="uk-section uk-section-overlap"></div>
-    {{--<a href="{{ URL::previous() }}" class="uk-button-secondary uk-button-small uk-border-rounded" uk-icon="arrow-left" ></a>--}}
-        {{ Breadcrumbs::render('showProduct', $product) }}
+    @section('hero')
+        <div class="uk-section uk-section-overlap"></div>
+        {{--<a href="{{ URL::previous() }}" class="uk-button-secondary uk-button-small uk-border-rounded" uk-icon="arrow-left" ></a>--}}
+            {{ Breadcrumbs::render('showProduct', $product) }}
 
 
-@endsection
+    @endsection
 @section('content')
 
     <!-- Product details section -->

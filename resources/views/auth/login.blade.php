@@ -21,7 +21,7 @@
                             <label class="uk-form-label">Email Address</label>
                             <div class="uk-inline uk-width-1-1">
                                 <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: mail"></span>
-                                <input id="email" type="email" class="uk-input{{ $errors->has('email') ? ' uk-form-danger' : '' }}"
+                                <input id="email" type="text" class="uk-input{{ $errors->has('email') ? ' uk-form-danger' : '' }}"
                                        name="email" value="{{ old('email') }}" required autofocus>
 
                             </div>
@@ -32,6 +32,30 @@
                                 </div>
                             @endif
                         </div>
+
+                        {{--<div>--}}
+
+                            {{--<label class="uk-form-label">Email Address Or Name</label>--}}
+                            {{--<div class="uk-inline uk-width-1-1">--}}
+                                {{--<span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: user"></span>--}}
+                                {{--<input id="name" type="text" class="uk-input{{ $errors->has('email') || $errors->has('name') ? ' uk-form-danger' : '' }}"--}}
+                                       {{--name="name" value="{{ old('name') }}" required autofocus>--}}
+
+                            {{--</div>--}}
+
+
+                            {{--@if ($errors->has('name'))--}}
+                                {{--<div class="uk-alert-danger" uk-alert>--}}
+                                    {{--{{ $errors->first('name') }}--}}
+                                {{--</div>--}}
+                            {{--@endif--}}
+                            {{--@if ($errors->has('email'))--}}
+                                {{--<div class="uk-alert-danger" uk-alert>--}}
+                                    {{--{{ $errors->first('email') }}--}}
+                                {{--</div>--}}
+                            {{--@endif--}}
+                        {{--</div>--}}
+
 
                         <div class="uk-margin">
                             <label class="uk-form-label">Password</label>

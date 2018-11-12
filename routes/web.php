@@ -8,11 +8,14 @@ Route::get('/', function () {
 });
 
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::Resource('dashboard', 'DashboardController');
+Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
+
+
+Route::resource('/shop', 'ProductController');
 Route::get('/shop/{product}', 'ProductController@show')->name('product.show');
 Route::post('/shop/{product}', 'ProductController@update')->name('upload');
-Route::resource('/shop', 'ProductController');
 
 
 

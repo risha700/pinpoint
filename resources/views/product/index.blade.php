@@ -12,7 +12,7 @@
 
     <div class="uk-section">
         <div class="uk-container">
-            <div class="uk-flex">
+            <div class="uk-flex uk-flex-column-reverse">
                 <div class="uk-grid-large uk-child-width-1-2@s uk-child-width-1-3@m uk-grid-match uk-text-center" uk-grid>
                     @foreach($products as $product)
 
@@ -63,22 +63,22 @@
 
 
                 {{--categories--}}
-                <div class="uk-margin-auto-right">
-                @foreach($categories as $category)
+                <div class="uk-flex-inline uk-flex-between uk-margin-bottom">
+                    <div class="uk-heading-bullet uk-text-bold">Categories : </div>
+
+                        @foreach($categories as $category)
 
 
-                    <ul class="uk-iconnav uk-iconnav-vertical">
-                        <li><a href="{{route('shop.index', ['category'=>$category->slug])}}" uk-icon="icon: plus">{{$category->name}}</a></li>
-                    </ul>
-                @endforeach
-                </div>
-
+                                <div class=""><a href="{{route('shop.index', ['category'=>$category->slug])}}" uk-icon="icon: plus">{{$category->name}}</a></div>
+                        @endforeach
+                        </div>
 {{-- {{ $products->appends(request()->input())->links()}}--}}
 
-
             </div><!-- Wrapper -->
-            <div class="uk-flex uk-flex-row uk-flex-center uk-margin-large-top">{{ $products->links('vendor.pagination.uikit') }}</div>
+            @if(!request()->category)
 
+            <div class="uk-flex uk-flex-row uk-flex-center uk-margin-large-top">{{ $products->links('vendor.pagination.uikit') }}</div>
+            @endif
         </div><!-- container ends -->
     </div>
 

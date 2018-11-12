@@ -15223,6 +15223,38 @@ iframe.uk-cover {
   }
 }
 
+.hover-style:hover {
+  border: solid 1px #1e87f0 !important;
+  cursor: pointer;
+  color: #1e87f0;
+}
+
+.hover-style {
+  border: solid 1px  black !important;
+}
+
+.hover-style-active {
+  border: solid 1px #1e87f0 !important;
+  cursor: pointer;
+  color: #1e87f0 !important;
+}
+
+.border-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 5px;
+  width: 100%;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.page_name {
+  color: #fff;
+  font-family: -webkit-pictograph;
+  font-variant-caps: all-petite-caps;
+}
+
 .straight-line:before {
   background-color: #fff;
   content: "";
@@ -15269,7 +15301,7 @@ iframe.uk-cover {
   height: auto;
 }
 
-#top-curve {
+.top-curve {
   position: absolute;
   bottom: auto;
   left: 0;

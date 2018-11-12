@@ -1,3 +1,4 @@
+
 export default {
 
     state:{
@@ -6,11 +7,16 @@ export default {
         cartProductList:[],
         perPage:0,
         totalProducts:0,
+        categories:[],
+        authUser:[]
 
     },
     mutations:{
         setCart (state, cart) {
             state.cart = cart
+        },
+        login (state, user) {
+            state.authUser = user
         },
         updateQty(state,item){
             state.cart.cartCount = JSON.parse(state.cart.cartCount)+ JSON.parse(item[1]) - JSON.parse(item[0].qty)
@@ -75,6 +81,9 @@ export default {
         },
         loadAllProducts(state,products){
             state.cartProductList = products
+        },
+        loadAllCategories(state,categories){
+            state.categories = categories
         }
 
     },
@@ -88,11 +97,25 @@ export default {
         productOptions: (state) => (data) => {
          let product = state.products.find((p)=> p.id == data.id)
             if(Object(product).hasOwnProperty('options')){
-                // return product.options.map((o) => o.name)
                 return Object.values(product.options).map((o) => o.name)
             }
-            // this.$forceUpdate();
-        }
+        },
+        productSlug: (state) => (data) => {
+            let product = state.cartProductList.find((i)=> i.slug == data)
+            return product;
+        },
+         categoryProducts: (state) => (data) => {
+            if(Object(data).hasOwnProperty('categories')){
+                data  = data.categories[0].name
+            }
+            let cat = state.categories.find((c)=> c.name == data)
+
+            if(Object(cat).hasOwnProperty('products')){
+                return cat.products
+            }
+
+
+        },
     },
     actions:{
         async fetchCart ({ commit }) {
@@ -182,7 +205,7 @@ export default {
             if(state.state.products.length!=0){
                 if(state.state.products.length === state.state.totalProducts) return window.events.$emit('stateComplete');
             }
-               await axios.get('/api/product', {
+               await axios.get('/api/shop', {
                    params: {
                        page: state.state.products.length / state.state.perPage + 1,
                    },
@@ -194,6 +217,18 @@ export default {
 
         async loadAllProducts(state){
             await axios.get('/shop').then(({data})=>state.commit('loadAllProducts', data))
+        },
+        async loadAllCategories(state){
+            await axios.get('/api/shop').then(({data})=>state.commit('loadAllCategories', data))
+        },
+
+       async  login(state){
+             await axios.post('/login')
+                .then(({data})=>state.commit('login', data))
+                .catch(error=>{
+                console.log(error.response.data);
+
+            });
         }
 
 

@@ -19,18 +19,25 @@ class User extends Authenticatable
 
 
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','email'
     ];
 
 
     protected $appends = ['is_admin'];
 
+    protected $with=['orders'];
 
     public function isAdmin(){
 
         if(auth()->check()){
-            return in_array(auth()->user()->email, ['Risha']);
+            return in_array(auth()->user()->email, ['ahbox@outlook.com']);
         }
+    }
+
+    public function getRouteKeyName()
+    {
+
+        return str_slug('name', "-");
     }
 
     public function getIsAdminAttribute()
@@ -45,6 +52,13 @@ class User extends Authenticatable
     }
 
 
+
+//    public function getOrdersAttribute(){
+//        return $this->attributes['orders'] = sort_array_of_array($this->orders()->get(), 'user_id', 'id');
+//    }
+//    public function setOrdersAttribute(){
+//        return $this->attributes['orders'] = $this->orders;
+//    }
 
 
 }

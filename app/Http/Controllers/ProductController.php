@@ -32,8 +32,7 @@ class ProductController extends Controller
             $products = Product::with('categories')->whereHas('categories', function ($query){
                 $query->where('slug', request()->category);
 
-            })->paginate(4);
-
+            })->get();
 
         }else{
             $products = Product::paginate(12);
@@ -110,6 +109,9 @@ class ProductController extends Controller
 //        $t= sort_array_of_array($product->options, 'name', 'type');
 //        dd($t['color']);
 
+        if(\request()->wantsJson()){
+            return $product;
+        }
         return view('product.show', compact('product'));
 
     }

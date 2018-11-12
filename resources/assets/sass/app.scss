@@ -13,13 +13,34 @@
 //custom css
 
 
-//.hover-style:hover{
-//  border: solid 1px  $global-primary-background;
-//  cursor: pointer;
-//  color:  $global-primary-background;
-//}
+.hover-style:hover{
+  border: solid 1px  $global-primary-background !important;
+  cursor: pointer;
+  color:  $global-primary-background;
+}
+.hover-style{
+  border: solid 1px  black !important;
+}
+.hover-style-active{
+  border: solid 1px  $global-primary-background !important;
+  cursor: pointer;
+  color:  $global-primary-background !important;
+}
+.border-line{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 5px;
+  width: 100%;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
 
-
+.page_name{
+  color: #fff;
+  font-family: -webkit-pictograph;
+  font-variant-caps: all-petite-caps;
+}
 .straight-line:before{
   background-color: #fff;
   content: "";
@@ -57,7 +78,7 @@
   height: auto;
 }
 
-#top-curve{
+.top-curve{
   position: absolute;
   bottom: auto;
   left: 0;

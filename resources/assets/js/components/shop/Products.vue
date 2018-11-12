@@ -82,16 +82,14 @@
 
             </infinite-loading>
             </div>
-            <!--Quick View Section-->
-            <quick-view></quick-view>
-            <!--QuickView modal ends-->
+
         </div>
 
 </template>
 
 <script>
     import InfiniteLoading from 'vue-infinite-loading';
-    const api = '/api/product';
+    const api = '/api/shop';
     export default {
         name:'Products',
         components: {

@@ -35,7 +35,7 @@
                         <li  class="{{ set_active('shop') }}"><a class="uk-button uk-button-text " href="{{ route('shop.index') }}">Shop</a></li>
                         <li  class="{{ set_active('cart') }}"><a class="uk-button uk-button-text " href="{{ route('cart.index') }}" uk-icon="cart"></a></li>
 
-                        <li  class="{{ set_active('home') }}"><a class="uk-button uk-button-text bound " uk-icon="heart"></a>
+                        <li  class="{{ set_active('dashboard') }}"><a class="uk-button uk-button-text bound " uk-icon="heart"></a>
 
                             <div class="uk-navbar-dropdown" uk-drop="mode:click">
                                 <ul class="uk-nav uk-navbar-dropdown-nav">
@@ -57,7 +57,7 @@
                             </li>
                         @else
                             <li>
-                                <a href="{{route('home')}}">{{ Auth::user()->name }}</a>
+                                <a href="{{route('dashboard')}}">{{ Auth::user()->name }}</a>
                                 <div class="uk-navbar-dropdown">
                                     <ul class="uk-nav uk-navbar-dropdown-nav">
                                         <li>

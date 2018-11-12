@@ -47,10 +47,17 @@
     }
 </script>
 
-<style scoped>
+<style >
     .hero{
 
 
     }
+    /*.home_background{*/
+        /*background-image: url('/svg/floral-1.svg'),linear-gradient(to right bottom, #1143572b, #45587e00, #8469974f, #c37a9c42, #f2949217);*/
+        /*background-position: bottom center;*/
+        /*background-blend-mode: soft-light;*/
+        /*background-repeat: repeat;*/
+        /*background-size: cover;*/
+    /*}*/
 
 </style>

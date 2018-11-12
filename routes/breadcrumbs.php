@@ -13,8 +13,25 @@ Breadcrumbs::for('product', function ($trail) {
 });
 
 // Home > Product > [id]
-Breadcrumbs::for('showProduct', function ($trail, $product) {
+//Breadcrumbs::for('showProduct', function ($trail, $product) {
+//    $trail->parent('product');
+//    $trail->push( $product->name , route('shop.show', $product->slug) );
+//
+//
+//
+//});
+
+
+// Home > Product > category
+Breadcrumbs::for('category', function ($trail, $category) {
     $trail->parent('product');
+    $trail->push($category->name, route('shop.index', ['category'=>$category->slug]));
+
+});
+
+// Home > Product > category->[slug] > product[slug]
+Breadcrumbs::for('showProduct', function ($trail, $product) {
+    $trail->parent('category', $product->categories[0]);
     $trail->push( $product->name , route('shop.show', $product->slug) );
 
 
@@ -22,7 +39,8 @@ Breadcrumbs::for('showProduct', function ($trail, $product) {
 });
 
 
-// Home > Product > [Category]
+
+// Home > Shop > [Category]
 
 Breadcrumbs::after(function ($trail) {
 
@@ -36,31 +54,3 @@ Breadcrumbs::after(function ($trail) {
 });
 
 
-
-//// Home > Product > category
-//Breadcrumbs::for('showCategory', function ($trail, $product) {
-//    $trail->parent('product');
-//    $trail->push( $product->category->name , route('product.show', $product->category) );
-//});
-
-
-//Breadcrumbs::for('showCategory', function ($trail, $category) {
-//    $trail->parent('product');
-//    $trail->push($category->name, route('category', $category->id));
-//});
-
-
-
-//// Home > Blog
-//Breadcrumbs::for('product', function ($trail) {
-//    $trail->parent('home');
-//    $trail->push('Blog', route('blog'));
-//});
-//
-
-//
-//// Home > Blog > [Category] > [Post]
-//Breadcrumbs::for('post', function ($trail, $post) {
-//    $trail->parent('category', $post->category);
-//    $trail->push($post->title, route('post', $post->id));
-//});

@@ -34,7 +34,7 @@
                     v-for="(menu, index) in router.options.routes"
                     :key="index" :to="router.options.routes[index].path"
                     @click.native="$scrollToTop"
-                    v-if="menu.component.name !='Checkout'"
+                    v-if="menu.showInMenu"
             >
                 <v-list-tile-action>
                     <v-badge v-show="menu.component.name ==='Cart' && store.state.cart.cartCount>0" color="success" left>

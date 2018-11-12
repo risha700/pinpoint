@@ -2,28 +2,28 @@
     <div>
         <portal to="hero">
             <v-responsive
-                    class="uk-height-medium"
+                    class="uk-height-small"
                     style="background-image: linear-gradient(to right top, #845EC2, #D65DB1, #FF6F91, #FF9671, #FFC75F,#F9F871);background-size:cover;"
                     dark
             >
                 <v-container  fill-height>
                     <v-layout align-center>
                         <v-flex text-xs-center>
-                            <h3 class="display-3">
+                                <div class="uk-animation-scale-up uk-heading-line">
+                                    <h3 class="display-1 page_name" >Shop</h3>
+                                </div>
 
-
-                            </h3>
                         </v-flex>
                     </v-layout>
                 </v-container>
             </v-responsive>
         </portal>
-        <v-container>
+        <!--<v-container>-->
 
             <!--<h1>Products</h1>-->
             <!--<products></products>-->
             <categories></categories>
-        </v-container>
+        <!--</v-container>-->
     </div>
 </template>
 

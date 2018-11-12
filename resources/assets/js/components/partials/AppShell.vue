@@ -24,7 +24,8 @@
             <v-spacer></v-spacer>
 
             <!--toolbar buttons vuerouter-->
-            <v-toolbar-items class="hidden-sm-and-down" v-for="(menu, index) in router.options.routes" :key="index" v-if="menu.component.name !='Checkout'">
+            <!--<v-toolbar-items class="hidden-sm-and-down" v-for="(menu, index) in router.options.routes" :key="index" v-if="menu.component.name !='Checkout'">-->
+            <v-toolbar-items class="hidden-sm-and-down" v-for="(menu, index) in router.options.routes" :key="index" v-if="menu.showInMenu ">
                 <v-btn flat :to="menu.path" class="fix_underline" @click.native="$scrollToTop">
                     <v-badge v-show="menu.component.name ==='Cart' && store.state.cart.cartCount>0" color="purple" overlap>
                         <span slot="badge">{{store.state.cart.cartCount}}</span>
@@ -44,17 +45,18 @@
         <!--Full width for designing-->
         <portal-target name="fullWidth"></portal-target>
 
-        <v-content @click.native="minifyDrawer">
+        <v-content @click.native="minifyDrawer" :class="setPageBackground()">
 
-            <v-layout row wrap>
+            <!--<v-layout row wrap>-->
                 <flash></flash>
-                <router-view></router-view>
-            </v-layout>
+                <router-view :key="$route.fullPath"></router-view>
+            <!--</v-layout>-->
 
             <!--<v-container grid-list-md text-xs-center>-->
 
             <!--</v-container>-->
         </v-content>
+        <quick-view></quick-view>
 
 
     </div>
@@ -80,7 +82,8 @@
         methods:{
             onScroll (e) {
                 this.offsetTop = window.pageYOffset || document.documentElement.scrollTop
-                this.offsetTop > this.$refs.protalHero.$el.clientHeight ?
+                this.offsetTop > this.$refs.protalHero.$el.clientHeight -20 ?
+                // this.offsetTop > 200 ?
                     this.menuColor = 'background-image: linear-gradient(to right top, #845EC2, #D65DB1, #FF6F91, #FF9671, #FFC75F,#F9F871);background-size:cover;':
                     this.menuColor = 'background-color: transparent;';
             },
@@ -92,10 +95,22 @@
                 window.events.$emit('minifyDrawer');
 
             },
+            setPageBackground(){
+                switch(this.$route.name){
+                    case 'shop':
+                        return 'shop_background'
+                    case 'home':
+                        return 'home_background'
+
+                }
+            }
 
         },
         mounted(){
                 this.$store.dispatch('fetchCart');
+                this.$store.dispatch('loadAllCategories');
+
+
         }
 
     }
