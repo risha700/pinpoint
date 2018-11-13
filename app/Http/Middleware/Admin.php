@@ -20,6 +20,7 @@ class Admin
             return $next($request);
 
         }
+        flash()->overlay('Opps','Unauthorized','error');
         return redirect('/');
     }
 }

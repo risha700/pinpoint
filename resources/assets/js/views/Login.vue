@@ -79,9 +79,8 @@
                         .then((res) => {
                             this.loading=true
                             this.$router.go(-1)
-                            // this.refresh()
+                            this.refresh()
                             flash('logged in')
-console.log(res)
                        }).catch((error) => console.log(error))
                     // this.$store.commit('login', this.form);
                 }

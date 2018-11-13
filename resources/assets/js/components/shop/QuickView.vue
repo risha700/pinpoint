@@ -75,6 +75,7 @@
                                 </v-radio-group >
                             </template>
 
+
                         </div>
                         <v-btn @click.native.prevent.stop="sendItemToCart(product)" class="uk-button primary uk-border-rounded" :key="product.id">
                             Add to cart <v-icon @click.prevent>add_shopping_cart</v-icon>

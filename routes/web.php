@@ -6,6 +6,11 @@ Auth::routes();
 Route::get('/', function () {
     return view('landing');
 });
+Route::get('/admin', function () {
+
+    return 'working';
+
+})->name('admin')->middleware('admin');
 
 
 Route::Resource('dashboard', 'DashboardController');

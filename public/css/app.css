@@ -15223,6 +15223,11 @@ iframe.uk-cover {
   }
 }
 
+.radio-card {
+  width: 200px;
+  height: 40px;
+}
+
 .hover-style:hover {
   border: solid 1px #1e87f0 !important;
   cursor: pointer;
