@@ -89,7 +89,7 @@
     #message {
         display: flex;
         top: 43px;
-        z-index:1000;
+        z-index:2000;
         width:100%;
         position: fixed;
     }

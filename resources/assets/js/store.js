@@ -95,9 +95,13 @@ export default {
             }
         },
         productOptions: (state) => (data) => {
-         let product = state.products.find((p)=> p.id == data.id)
+         let product = state.cartProductList.find((p)=> p.id == data.id)
+
             if(Object(product).hasOwnProperty('options')){
-                return Object.values(product.options).map((o) => o.name)
+                return _.chain(Object.values(product.options)).groupBy('name').mapValues(function (v) {
+                    return _.chain(v).mapValues('type').value()
+                }).value();
+
             }
         },
         productSlug: (state) => (data) => {
@@ -121,14 +125,14 @@ export default {
         async fetchCart ({ commit }) {
             await axios.get('/cart')
                 .then((cart) =>{commit('setCart', cart.data)})
-                .catch((error)=>console.log(error))
+                .catch((error)=>{console.log(error);flash(error.response.data,'error')})
         },
         async updateQty({ commit },item){
             await axios.patch('/cart/'+ item[0].rowId, {
                 quantity:item[1],
                 id:item[0].id
             })
-                .then(function (response) {
+                .then((response)=>{
                     commit('updateQty',item)
                     flash(response.data)
 
@@ -188,18 +192,34 @@ export default {
              commit('incrementCartCount',e)
         },
 
-        async addToCart({dispatch},data){
-
-           await axios.post('/cart',  data  )
+        async addToCart({dispatch},form){
+           await form.post('/cart' )
                 .then((response) =>{
-                    flash(response.data);
-                    // window.events.$emit('itemAddedToCart', response);
-                        dispatch('incrementCartCount',1)
+                    flash(response);
+                    dispatch('incrementCartCount',1)
                 }).catch(error=>{
-                    flash(error.response.data,'warning');
+
+                   flash(error,'warning');
 
                 });
         },
+        // async addToCart({dispatch},data){
+        //     return new Promise((resolve, reject) => {
+        //           axios.post('/cart',  data  )
+        //             .then((response) =>{
+        //                 flash(response.data);
+        //                 dispatch('incrementCartCount',1)
+        //                 resolve(response.data)
+        //
+        //             }).catch(error=>{
+        //                 flash(error.response.data,'warning');
+        //               reject(error.response.data)
+        //
+        //             });
+        //
+        //     })
+        //
+        // },
 
         async loadProducts(state) {
             if(state.state.products.length!=0){
@@ -216,16 +236,19 @@ export default {
         },
 
         async loadAllProducts(state){
+            if(state.state.cartProductList.length==0)
             await axios.get('/shop').then(({data})=>state.commit('loadAllProducts', data))
         },
         async loadAllCategories(state){
-            await axios.get('/api/shop').then(({data})=>state.commit('loadAllCategories', data))
+            // if(state.state.categories.length==0)
+                await axios.get('/api/shop').then(({data})=>state.commit('loadAllCategories', data))
         },
 
-       async  login(state){
-             await axios.post('/login')
+       async  login(state,form){
+             // await axios.post('/login',data)
+           await form.post('/login')
                 .then(({data})=>state.commit('login', data))
-                .catch(error=>{
+                .catch((error)=>{
                 console.log(error.response.data);
 
             });

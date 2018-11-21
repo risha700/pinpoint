@@ -6,7 +6,7 @@
 
         <v-container  justify-center v-for="cat in $store.state.categories" :key="cat.id" >
             <v-card
-                    color="transparent" class="hover-style" hover raised ripple
+                     class="hover-style" hover raised ripple
                     exact-active-class="hover-style-active"
                     :to="{ name: 'shop', query: { category: cat.slug }}" >
                 <v-card-text>

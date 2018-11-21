@@ -111,8 +111,8 @@ class Form {
      * @param {object} data
      */
     onSuccess(data) {
-        // alert('Success',data); // temporary
         this.reset();
+
     }
 
 

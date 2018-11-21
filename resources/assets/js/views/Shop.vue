@@ -9,10 +9,13 @@
                 <v-container  fill-height>
                     <v-layout align-center>
                         <v-flex text-xs-center>
-                                <div class="uk-animation-scale-up uk-heading-line">
-                                    <h3 class="display-1 page_name" >Shop</h3>
-                                </div>
-
+                            <transition
+                                    name="fadeInUp"
+                                    enter-active-class="animated fadeInUp"
+                                    leave-active-class="animated fadeOutDown"
+                            >
+                                <div class=" uk-heading-line"><h3 class="display-1 page_name">Shop</h3></div>
+                            </transition>
                         </v-flex>
                     </v-layout>
                 </v-container>
@@ -37,8 +40,9 @@
           return{
           }
         },
-        mounted(){
-
+        created(){
+            localStorage.setItem('hello risha','ho themere!!')
+            console.log(localStorage)
         },
         methods: {
 

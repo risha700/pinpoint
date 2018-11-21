@@ -1,6 +1,6 @@
 <template>
     <div class="uk-container">
-        <h1 class="uk-heading-line uk-text-center uk-padding-large"><span>Similar Products</span></h1>
+        <h1 class="uk-heading-line uk-text-center uk-padding-large"><span>Related Products</span></h1>
 
         <div uk-slider="center: true">
 

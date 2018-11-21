@@ -20,7 +20,8 @@
                          style="stroke: #6a1b9a;stroke-width:20px">
 
 
-                </v-toolbar-title></div>
+                </v-toolbar-title>
+            </div>
             <v-spacer></v-spacer>
 
             <!--toolbar buttons vuerouter-->
@@ -49,7 +50,9 @@
 
             <!--<v-layout row wrap>-->
                 <flash></flash>
+            <transition tag="section" :name="transitionName">
                 <router-view :key="$route.fullPath"></router-view>
+            </transition>
             <!--</v-layout>-->
 
             <!--<v-container grid-list-md text-xs-center>-->
@@ -76,9 +79,16 @@
                 menuColor:'',
                 router:this.$router,
                 store:this.$store,
+                transitionName:''
             }
         },
-
+        watch: {
+            '$route' (to, from) {
+                const toDepth = to.path.split('/').length
+                const fromDepth = from.path.split('/').length
+                this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+            }
+        },
         methods:{
             onScroll (e) {
                 this.offsetTop = window.pageYOffset || document.documentElement.scrollTop
@@ -106,9 +116,11 @@
             }
 
         },
-        mounted(){
+        beforeCreate(){
+                //preparing all ajax requests once
                 this.$store.dispatch('fetchCart');
                 this.$store.dispatch('loadAllCategories');
+                this.$store.dispatch('loadAllProducts');
 
 
         }
@@ -116,7 +128,19 @@
     }
 </script>
 
-<style scoped>
+<style>
 
+    .slide-left-enter-active {
+        animation: zoomInDown .2s ease;
+    }
+    .slide-left-leave-active {
+        animation: zoomOutDown .1s ease-out;
+    }
+    .slide-right-enter-active {
+        animation: zoomInUp .2s ease;
+    }
+    .slide-right-leave-active {
+        animation: zoomOutUp .1s ease-out;
+    }
 
 </style>

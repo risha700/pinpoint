@@ -85,34 +85,37 @@
         components: {CategoryMenu, SubCategory},
         data(){
             return{
-             categories:'',
              loading:false,
             }
         },
         watch: {
-            // pushRoute(newQuery) {
-            //     this.$router.push({
-            //         path: '/shop?category=' + newQuery
-            //     })
-            // }
+
             },
-        created(){
+        computed:{
+          categories(){
+              if(this.$route.query.category){
+                 return this.$store.state.categories.filter((cat,i)=>{
+                      if(cat.slug == this.$route.query.category){
+                          return cat
+                      }
+                  })
+              }else{
+                  return this.$store.state.categories
+
+              }
+
+          },
+
+        },
+        beforeCreate(){
             this.loading=true
-            this.loadAllCategories()
 
         },
         mounted(){
+            this.loading=false
+
         },
         methods:{
-             async loadAllCategories(){
-                 if(this.$route.query.category){
-                     await  axios.get(`api/shop?category=${this.$route.query.category}`).then(({data})=>{this.categories = data;this.loading=false;})
-
-                 }else{
-                await  axios.get('api/shop').then(({data})=>{this.categories = data;this.loading=false;})
-                 }
-
-             },
             setStyles(cat){
                 switch (cat.name)
                 {
@@ -124,6 +127,7 @@
                         return 'accent cathead'
                 }
             },
+
 
         },
 

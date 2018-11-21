@@ -61,7 +61,7 @@ let routes=[
         name:'login',
         component:require('./views/Login.vue'),
         icon:'',
-        showInMenu:true
+        showInMenu:false
     },
 
 

@@ -4,7 +4,7 @@ import VueClipboard from 'vue-clipboard2'
 import VueRouter from 'vue-router'
 import PortalVue from 'portal-vue'
 import router from './routes'
-import'vuetify/es5/util/theme.js'
+// import'vuetify/es5/util/theme.js'
 import store from './store'
 
 
@@ -21,6 +21,7 @@ Vue.component('flash', require('./components/partials/Flash.vue'));
 Vue.component('app-shell', require('./components/partials/AppShell'));
 Vue.component('quick-view', require('./components/shop/QuickView'));
 Vue.component('page-not-found', require('./components/partials/PageNotFound'));
+Vue.component('loading', require('./components/partials/Loading'));
 
 
 Vue.filter('moneyFormat', (number)=>{

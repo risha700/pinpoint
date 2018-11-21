@@ -10,8 +10,13 @@
                 <v-container  fill-height>
                     <v-layout align-center>
                         <v-container text-xs-center>
-                                <div class="uk-animation-scale-up uk-heading-line"><h3 class="display-1 page_name">Shopping Cart</h3></div>
-
+                            <transition
+                                    name="fadeInUp"
+                                    enter-active-class="animated fadeInUp"
+                                    leave-active-class="animated fadeOutDown"
+                            >
+                                <div class=" uk-heading-line"><h3 class="display-1 page_name">Shopping Cart</h3></div>
+                            </transition>
                         </v-container>
                     </v-layout>
                 </v-container>
@@ -155,7 +160,6 @@
         components: { WishList, EmptyCart},
         data(){
           return{
-              headers:['Price', 'Quantity'],
               loading:false
 
           }
@@ -180,9 +184,9 @@
                 this.$store.dispatch('addToWishList', item)
             },
             quickView(item){
-                let product = this.$store.state.cartProductList.find(i=>i.id==item.id)
-
-                window.events.$emit('quickView', product);
+                const product = this.$store.state.cartProductList.find(i=>i.id==item.id)
+                return  this.$openModal(product)
+                // window.events.$emit('quickView', product);
             },
             setPhotos(item){
                 let product = this.$store.state.cartProductList.find(i=>i.id==item.id)
@@ -203,7 +207,7 @@
         },
         beforeCreate(){
             //make product stock available
-            this.$store.dispatch('loadAllProducts')
+            // this.$store.dispatch('loadAllProducts')
             this.$store.dispatch('fetchCart')
         }
     }
