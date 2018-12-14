@@ -1,0 +1,63 @@
+[localhost] > git rev-parse --abbrev-ref HEAD
+[localhost] < master
+[138.197.109.152] > echo $0
+[138.197.109.152] < bash
+[138.197.109.152] > if [ ! -d /var/www/pinpoint ]; then mkdir -p /var/www/pinpoint; fi
+[138.197.109.152] > if [ ! -L /var/www/pinpoint/current ] && [ -d /var/www/pinpoint/current ]; then echo 'true'; fi
+[138.197.109.152] > cd /var/www/pinpoint && if [ ! -d .dep ]; then mkdir .dep; fi
+[138.197.109.152] > cd /var/www/pinpoint && if [ ! -d releases ]; then mkdir releases; fi
+[138.197.109.152] > cd /var/www/pinpoint && if [ ! -d shared ]; then mkdir shared; fi
+[138.197.109.152] > if [ -f /var/www/pinpoint/.dep/deploy.lock ]; then echo 'true'; fi
+[138.197.109.152] > touch /var/www/pinpoint/.dep/deploy.lock
+[138.197.109.152] > cd /var/www/pinpoint && (if [ -h release ]; then echo 'true'; fi)
+[138.197.109.152] < true
+[138.197.109.152] > cd /var/www/pinpoint && (rm -rf "$(readlink release)")
+[138.197.109.152] > cd /var/www/pinpoint && (rm release)
+[138.197.109.152] > cd /var/www/pinpoint && (if [ -d releases ] && [ "$(ls -A releases)" ]; then echo 'true'; fi)
+[138.197.109.152] > cd /var/www/pinpoint && (if [ -d /var/www/pinpoint/releases/1 ]; then echo 'true'; fi)
+[138.197.109.152] > cd /var/www/pinpoint && (date +"%Y%m%d%H%M%S")
+[138.197.109.152] < 20181214044058
+[138.197.109.152] > cd /var/www/pinpoint && (echo '20181214044058,1' >> .dep/releases)
+[138.197.109.152] > cd /var/www/pinpoint && (mkdir /var/www/pinpoint/releases/1)
+[138.197.109.152] > cd /var/www/pinpoint && (if [[ $(man ln 2>&1 || ln -h 2>&1 || ln --help 2>&1) =~ '--relative' ]]; then echo 'true'; fi)
+[138.197.109.152] < true
+[138.197.109.152] > cd /var/www/pinpoint && (ln -nfs --relative /var/www/pinpoint/releases/1 /var/www/pinpoint/release)
+[138.197.109.152] > command -v 'git' || which 'git' || type -p 'git'
+[138.197.109.152] < /usr/bin/git
+[138.197.109.152] > /usr/bin/git version
+[138.197.109.152] < git version 2.7.4
+[138.197.109.152] > cd /var/www/pinpoint && (if [ -h /var/www/pinpoint/release ]; then echo 'true'; fi)
+[138.197.109.152] < true
+[138.197.109.152] > cd /var/www/pinpoint && (readlink /var/www/pinpoint/release)
+[138.197.109.152] < releases/1
+[138.197.109.152] > cd /var/www/pinpoint && (/usr/bin/git clone -b master  --recursive -q git@github.com:risha700/pinpoint.git /var/www/pinpoint/releases/1 2>&1)
+[Symfony\Component\Process\Exception\ProcessFailedException] The command "ssh -A -tt -i ~/.ssh/id_rsa root@138.197.109.152 'cd /var/www/pinpoint && (/usr/bin/git clone -b master  --recursive -q git@github.com:risha700/pinpoint.git /var/www/pinpoint/releases/1 2>&1)'" failed.
+
+Exit Code: 128(Invalid exit argument)
+
+Working directory: /Users/Rs/deployment-test/pinpoint
+
+Output:
+================
+
+
+Error Output:
+================
+
+#0 phar:///usr/local/bin/dep/src/Ssh/Client.php(75): Symfony\Component\Process\Process->mustRun()
+#1 phar:///usr/local/bin/dep/src/functions.php(304): Deployer\Ssh\Client->run(Object(Deployer\Host\Host), ''cd /var/www/pi...', Array)
+#2 phar:///usr/local/bin/dep/recipe/deploy/update_code.php(90): Deployer\run('cd /var/www/pin...', Array)
+#3 [internal function]: Deployer\Deployer::Deployer\{closure}()
+#4 phar:///usr/local/bin/dep/src/Task/Task.php(105): call_user_func(Object(Closure))
+#5 phar:///usr/local/bin/dep/src/Executor/SeriesExecutor.php(63): Deployer\Task\Task->run(Object(Deployer\Task\Context))
+#6 phar:///usr/local/bin/dep/src/Console/TaskCommand.php(142): Deployer\Executor\SeriesExecutor->run(Array, Array)
+#7 phar:///usr/local/bin/dep/vendor/symfony/console/Command/Command.php(252): Deployer\Console\TaskCommand->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#8 phar:///usr/local/bin/dep/vendor/symfony/console/Application.php(946): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#9 phar:///usr/local/bin/dep/src/Console/Application.php(133): Symfony\Component\Console\Application->doRunCommand(Object(Deployer\Console\TaskCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#10 phar:///usr/local/bin/dep/vendor/symfony/console/Application.php(248): Deployer\Console\Application->doRunCommand(Object(Deployer\Console\TaskCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#11 phar:///usr/local/bin/dep/vendor/symfony/console/Application.php(148): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#12 phar:///usr/local/bin/dep/src/Deployer.php(331): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#13 phar:///usr/local/bin/dep/bin/dep(119): Deployer\Deployer::run('6.3.0', '/Users/Rs/deplo...')
+#14 /usr/local/bin/dep(4): require('phar:///usr/loc...')
+#15 {main}
+[138.197.109.152] > rm -f /var/www/pinpoint/.dep/deploy.lock
