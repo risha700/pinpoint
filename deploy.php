@@ -23,6 +23,7 @@ add('writable_dirs', []);
 // Hosts
 
 host('138.197.109.152')
+->user('root')
 ->identityFile('~/.ssh/id_rsa')
     ->set('deploy_path', '/var/www/pinpoint');    
     
