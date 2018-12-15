@@ -25,7 +25,7 @@ add('writable_dirs', []);
 host('138.197.109.152')
 ->user('deployer')
 ->identityFile('~/.ssh/deployerkey')
-    ->set('deploy_path', '/var/html/www/pinpoint');    
+    ->set('deploy_path', '/var/www/html/pinpoint');    
     
 // Tasks
 
