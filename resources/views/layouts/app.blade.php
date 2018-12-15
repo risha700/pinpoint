@@ -7,6 +7,8 @@
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <!--Google-->
         <meta name="google-site-verification" content="nnhbCrHYz0Dkr56eke-cg2dxOCu8a1JnD0LIfkVqFZk" />
         <title>{{ config('app.name', 'Laravel') }}</title>
         <!-- Scripts -->
