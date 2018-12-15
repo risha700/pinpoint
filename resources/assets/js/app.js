@@ -1,4 +1,4 @@
-
+import "@babel/polyfill";
 import './bootstrap'
 import VueClipboard from 'vue-clipboard2'
 import VueRouter from 'vue-router'
