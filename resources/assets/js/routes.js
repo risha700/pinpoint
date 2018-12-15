@@ -71,8 +71,8 @@ let routes=[
 
 export default new VueRouter({
 
-    // mode: 'history',
-    // hashbang: false,
+    mode: 'history',
+    hashbang: false,
     // base: '/',
     fallback: true,
     linkActiveClass: 'v-btn--active',
