@@ -30,9 +30,7 @@
 
         <div id="app">
             <v-app>
-            <!-- @if(!request()->is('/'))
-                @include('partials.navbar')
-            @endif -->
+
 
 
 
