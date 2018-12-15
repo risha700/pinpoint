@@ -31,9 +31,9 @@
         <div id="app">
             <v-app>
         {{--manipulating to start vue router--}}
-            @if(!request()->is('/'))
+            <!-- @if(!request()->is('/'))
                 @include('partials.navbar')
-            @endif
+            @endif -->
 
 
 
