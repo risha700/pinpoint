@@ -123,12 +123,12 @@ export default {
     },
     actions:{
         async fetchCart ({ commit }) {
-            await axios.get('/cart')
+            await axios.get('/api/cart')
                 .then((cart) =>{commit('setCart', cart.data)})
                 .catch((error)=>{console.log(error);flash(error.response.data,'error')})
         },
         async updateQty({ commit },item){
-            await axios.patch('/cart/'+ item[0].rowId, {
+            await axios.patch('/api/cart/'+ item[0].rowId, {
                 quantity:item[1],
                 id:item[0].id
             })
@@ -143,12 +143,12 @@ export default {
 
         },
         removeItem({commit},item ){
-            axios.delete('cart/'+ item[0].rowId);
+            axios.delete('/api/cart/'+ item[0].rowId);
             commit('removeItem', item[0])
 
         },
         async addToWishList ({ commit }, item) {
-            await axios.post(`/cart/${item.rowId}/wishlist`)
+            await axios.post(`/api/cart/${item.rowId}/wishlist`)
                 .then(response=>{
                     commit('addToWishList', item)
                     flash(response.data)
@@ -193,7 +193,7 @@ export default {
         },
 
         async addToCart({dispatch},form){
-           await form.post('/cart' )
+           await form.post('/api/cart' )
                 .then((response) =>{
                     flash(response);
                     dispatch('incrementCartCount',1)
@@ -237,7 +237,7 @@ export default {
 
         async loadAllProducts(state){
             if(state.state.cartProductList.length==0)
-            await axios.get('/shop').then(({data})=>state.commit('loadAllProducts', data))
+            await axios.get('/api/shop').then(({data})=>state.commit('loadAllProducts', data))
         },
         async loadAllCategories(state){
             // if(state.state.categories.length==0)

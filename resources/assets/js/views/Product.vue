@@ -185,6 +185,7 @@
             this.assignFormProduct();
         },
         beforeRouteUpdate (to, from, next) {
+            
             let product = this.$store.state.cartProductList.find((product)=>product.slug == to.params.slug)
             if(!product){this.$router.push({ name: '404',params:{0:to.params.slug} })}
             next()

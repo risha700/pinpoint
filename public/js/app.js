@@ -5560,6 +5560,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         this.assignFormProduct();
     },
     beforeRouteUpdate: function beforeRouteUpdate(to, from, next) {
+
         var product = this.$store.state.cartProductList.find(function (product) {
             return product.slug == to.params.slug;
         });
@@ -13273,7 +13274,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -107219,7 +107220,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                         switch (_context.prev = _context.next) {
                             case 0:
                                 _context.next = 2;
-                                return axios.get('/cart').then(function (cart) {
+                                return axios.get('/api/cart').then(function (cart) {
                                     commit('setCart', cart.data);
                                 }).catch(function (error) {
                                     console.log(error);flash(error.response.data, 'error');
@@ -107247,7 +107248,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                         switch (_context2.prev = _context2.next) {
                             case 0:
                                 _context2.next = 2;
-                                return axios.patch('/cart/' + item[0].rowId, {
+                                return axios.patch('/api/cart/' + item[0].rowId, {
                                     quantity: item[1],
                                     id: item[0].id
                                 }).then(function (response) {
@@ -107275,7 +107276,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         removeItem: function removeItem(_ref6, item) {
             var commit = _ref6.commit;
 
-            axios.delete('cart/' + item[0].rowId);
+            axios.delete('/api/cart/' + item[0].rowId);
             commit('removeItem', item[0]);
         },
         addToWishList: function () {
@@ -107286,7 +107287,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                         switch (_context3.prev = _context3.next) {
                             case 0:
                                 _context3.next = 2;
-                                return axios.post('/cart/' + item.rowId + '/wishlist').then(function (response) {
+                                return axios.post('/api/cart/' + item.rowId + '/wishlist').then(function (response) {
                                     commit('addToWishList', item);
                                     flash(response.data);
                                 }).catch(function (error) {
@@ -107409,7 +107410,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                         switch (_context7.prev = _context7.next) {
                             case 0:
                                 _context7.next = 2;
-                                return form.post('/cart').then(function (response) {
+                                return form.post('/api/cart').then(function (response) {
                                     flash(response);
                                     dispatch('incrementCartCount', 1);
                                 }).catch(function (error) {
@@ -107506,7 +107507,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 }
 
                                 _context9.next = 3;
-                                return axios.get('/shop').then(function (_ref21) {
+                                return axios.get('/api/shop').then(function (_ref21) {
                                     var data = _ref21.data;
                                     return state.commit('loadAllProducts', data);
                                 });
