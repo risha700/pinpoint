@@ -23,7 +23,7 @@
     },
     "dependencies": {
         "@babel/polyfill": "^7.0.0",
-        "ajv": "^6.5.4",
+        "ajv": "^6.12.3",
         "es6-promise": "^4.2.5",
         "imagemin": "^5.3.1",
         "sweetalert2": "^7.28.7",
